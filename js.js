@@ -45,7 +45,7 @@ window.addEventListener("DOMContentLoaded", function () {
     // DEFAULT LOAD (FIXED ISSUE)
     // ==============================
     loadTextFile("frameB", "./Introduction");
-    loadTextFile("frameD", "./Gospel/John");
+    loadTextFile("frameC", "./Gospel/John");
     loadTextFile("frameD", "./Resources");
 
     // ==============================
