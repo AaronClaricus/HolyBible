@@ -291,7 +291,7 @@ const highlightSchemes = {
 
     red: {
         bg: "#141414",
-        text: "#cc0000"
+        text: "#DAA520"
     },
 
     purple: {
