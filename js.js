@@ -103,7 +103,7 @@ html, body{
     word-break:break-word;
     line-height:1.4;
     background:#000;
-    color:#fff;
+    color:#E0E0E0;
     box-sizing:border-box;
 }
 </style>
