@@ -45,6 +45,7 @@ window.addEventListener("DOMContentLoaded", function () {
     // DEFAULT LOAD (FIXED ISSUE)
     // ==============================
     loadTextFile("frameB", "./Introduction");
+    loadTextFile("frameD", "./Gospel/John");
     loadTextFile("frameD", "./Resources");
 
     // ==============================
@@ -239,6 +240,32 @@ iframe.onload = () => {
 
     doc.head.appendChild(style);
 };
+
+// ==============================
+// CHANGE FONT BACKGROUND COLOR WHEN HIGHLIGHTED
+// ==============================
+
+
+const iframe3 = document.getElementById("frameC");
+
+iframe.onload = () => {
+    const doc = iframe.contentDocument;
+
+    const style = doc.createElement("style");
+    style.textContent = `
+        ::selection {
+            background: #030303;
+            color: #008529;
+        }
+
+        ::-moz-selection {
+            background: #030303;
+            color: #008529;
+        }
+    `;
+
+    doc.head.appendChild(style);
+};
 // ==============================
 // CHANGE FONT BACKGROUND COLOR WHEN HIGHLIGHTED
 // ==============================
@@ -372,6 +399,10 @@ function applySchemeToAllIframes() {
     );
 
     applyHighlightScheme(
+        "frameC",
+        scheme
+    );
+    applyHighlightScheme(
         "frameD",
         scheme
     );
@@ -405,6 +436,11 @@ function updateIframeTitle(frameId, filePath) {
         titleId = "titleB";
     }
 
+	    if (frameId === "frameC") {
+        titleId = "titleC";
+    }
+
+
     if (frameId === "frameD") {
         titleId = "titleD";
     }
@@ -422,5 +458,27 @@ function updateIframeTitle(frameId, filePath) {
 
     titleBar.textContent = fileName;
 }
+
+
+
+
+const toggleButton = document.getElementById("layoutToggle");
+
+toggleButton.addEventListener("click", function(){
+
+    document.body.classList.toggle("two-panel");
+
+    if(document.body.classList.contains("two-panel")){
+
+        toggleButton.textContent = "Switch to 3 Panel Mode";
+
+    } else {
+
+        toggleButton.textContent = "Switch to 2 Panel Mode";
+
+    }
+
+});
+
 
 
