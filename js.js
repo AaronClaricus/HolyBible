@@ -194,7 +194,7 @@ async function loadTextFile(frameId, file){
 // ==============================
 function updateIframeFonts(){
 
-    ["frameB","frameD"].forEach(function(id){
+    ["frameB","frameC","frameD"].forEach(function(id){
 
         const iframe = document.getElementById(id);
 
