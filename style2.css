@@ -401,7 +401,9 @@ body{
 }
 
  
-
+.two-panel .center-item{
+    display:none;
+}
 
 
 

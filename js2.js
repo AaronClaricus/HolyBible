@@ -127,7 +127,7 @@ const NAVIGATION = [
 
     ],
 		[
-			"Textus Receptus New Testament",
+			"Textus Receptus Greek New Testament",
 
 			[
 				"Gospel",
@@ -631,24 +631,37 @@ function createTree(node){
         const nested = document.createElement("ul");
         nested.className = "nested";
 
-        FRAMES.forEach(frame => {
+		FRAMES.forEach(frame => {
 
-            const frameLi = document.createElement("li");
+			const frameLi =
+				document.createElement("li");
 
-            const link = document.createElement("span");
+			// ==============================
+			// CENTER PANEL ITEMS
+			// ==============================
 
-            link.className = "file-link";
+			if(frame[0] === "frameC"){
 
-            link.dataset.frame = frame[0];
-            link.dataset.file = node[1];
+				frameLi.classList.add(
+					"center-item"
+				);
+			}
 
-            link.textContent =
-                frame[1] + " : " + node[0];
+			const link =
+				document.createElement("span");
 
-            frameLi.appendChild(link);
+			link.className = "file-link";
 
-            nested.appendChild(frameLi);
-        });
+			link.dataset.frame = frame[0];
+			link.dataset.file = node[1];
+
+			link.textContent =
+				frame[1] + " : " + node[0];
+
+			frameLi.appendChild(link);
+
+			nested.appendChild(frameLi);
+		});
 
         li.appendChild(nested);
 
