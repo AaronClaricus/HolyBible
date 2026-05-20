@@ -2,23 +2,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
     console.log("SCRIPT LOADED");
 
-    // ==============================
-    // TOGGLE NESTED MENUS
-    // ==============================
-    document.querySelectorAll(".toggle").forEach(function(toggle){
-        toggle.addEventListener("click", function(){
-            const nested = this.nextElementSibling;
-            if(!nested) return;
 
-            nested.classList.toggle("open");
-
-            if(nested.classList.contains("open")){
-                this.textContent = this.textContent.replace("▶","▼");
-            } else {
-                this.textContent = this.textContent.replace("▼","▶");
-            }
-        });
-    });
 
     // ==============================
     // FONT SIZE CONTROL
