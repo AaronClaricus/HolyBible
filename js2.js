@@ -236,6 +236,63 @@ const NAVIGATION = [
 			["Revelation", "./Prophets/Revelation Interlinear"]
 		]
 	],
+	
+		[
+			"Berean Greek New Testament",
+
+			[
+				"Gospel",
+
+				["Matthew", "./BG/Gospel/Matthew Greek"],
+				["Mark", "./BG/Gospel/Mark Greek"],
+				["Luke", "./BG/Gospel/Luke Greek"],
+				["John", "./BG/Gospel/John Greek"]
+			],
+
+			[
+				"Pauline Epistles",
+
+				["Romans", "./BG/Epistles/Romans Greek"],
+				["1 Corinthians", "./BG/Epistles/1 Corinthians Greek"],
+				["2 Corinthians", "./BG/Epistles/2 Corinthians Greek"],
+				["Galatians", "./BG/Epistles/Galatians Greek"],
+				["Ephesians", "./BG/Epistles/Ephesians Greek"],
+				["Philippians", "./BG/Epistles/Philippians Greek"],
+				["Colossians", "./BG/Epistles/Colossians Greek"],
+				["1 Thessalonians", "./BG/Epistles/1 Thessalonians Greek"],
+				["2 Thessalonians", "./BG/Epistles/2 Thessalonians Greek"],
+				["1 Timothy", "./BG/Epistles/1 Timothy Greek"],
+				["2 Timothy", "./BG/Epistles/2 Timothy Greek"],
+				["Titus", "./BG/Epistles/Titus Greek"],
+				["Philemon", "./BG/Epistles/Philemon Greek"],
+				["Hebrews", "./BG/Epistles/Hebrews Greek"]
+			],
+
+			[
+				"Epistles",
+
+				["James", "./BG/Epistles/James Greek"],
+				["1 Peter", "./BG/Epistles/1 Peter Greek"],
+				["2 Peter", "./BG/Epistles/2 Peter Greek"],
+				["1 John", "./BG/Epistles/1 John Greek"],
+				["2 John", "./BG/Epistles/2 John Greek"],
+				["3 John", "./BG/Epistles/3 John Greek"],
+				["Jude", "./BG/Epistles/Jude Greek"]
+			],
+
+			[
+				"History",
+
+				["Acts", "./BG/History/Acts Greek"]
+			],
+
+			[
+				"Prophecy",
+
+				["Revelation", "./BG/Prophecy/Revelation Greek"]
+			]
+		],
+	
 	[
 		"King James Version 1611: New Testament",
 
