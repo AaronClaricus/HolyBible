@@ -266,13 +266,8 @@ iframe,
    TWO PANEL MODE
 ========================= */
 
-body.two-panel #frameC,
-body.two-panel .center-wrapper,
-body.two-panel .center-item,
-body.two-panel #titleC,
-body.two-panel .center-link{
-    display:none;
-}
+
+
 
 body.two-panel #frameB,
 body.two-panel #frameD{
@@ -280,12 +275,67 @@ body.two-panel #frameD{
     width:auto;
 }
 
-.center-link{
+
+/* =========================
+   PANEL TRANSITIONS
+========================= */
+
+.frame-wrapper{
+    flex:1 1 0;
+
+    min-width:0;
+
+    overflow:hidden;
+
     transition:
-        opacity 0.15s ease,
-        max-height 0.25s ease,
-        margin 0.25s ease;
+        flex 0.35s ease,
+        opacity 0.25s ease,
+        transform 0.35s ease;
 }
 
+/* CENTER PANEL */
+
+.center-wrapper{
+    opacity:1;
+    transform:scaleX(1);
+
+    transition:
+        flex 0.35s ease,
+        opacity 0.25s ease,
+        transform 0.35s ease;
+}
+
+/* =========================
+   TWO PANEL MODE
+========================= */
+
+body.two-panel .center-wrapper{
+
+    flex:0 0 0 !important;
+
+    width:0 !important;
+    min-width:0 !important;
+
+    opacity:0;
+
+    transform:scaleX(0.92);
+
+    pointer-events:none;
+
+    overflow:hidden;
+}
+
+/* OPTIONAL */
+
+body.two-panel .center-link,
+body.two-panel #titleC{
+    opacity:0;
+
+    transition:opacity 0.15s ease;
+}
+
+html, body{
+    background:#000 !important;
+}
 
 </style>
