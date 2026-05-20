@@ -257,9 +257,7 @@ iframe,
 
     user-select:none;
 
-    transition:
-        opacity 0.2s ease,
-        background 0.2s ease;
+ 
 }
 
 /* =========================
@@ -289,7 +287,7 @@ body.two-panel #frameD{
 
     transition:
         flex 0.35s ease,
-        opacity 0.25s ease,
+        opacity 0.35s ease,
         transform 0.35s ease;
 }
 
