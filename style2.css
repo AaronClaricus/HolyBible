@@ -40,10 +40,7 @@ body {
     height: 100vh;
 }
 
-#navA {
-    width: 320px;
-    overflow-y: auto;
-}
+
 
 #content {
     display: flex;
@@ -92,7 +89,7 @@ body {
 /* NAVIGATION */
 
 #navA {
-    width: 320px;
+    width: 240px;
     overflow-y: auto;
     flex-shrink: 0;
 }
@@ -284,8 +281,8 @@ body{
 
 .nav-column{
 
-    width:320px;
-    min-width:320px;
+    width:240px;
+    min-width:100px;
 
     overflow-y:auto;
 
@@ -404,4 +401,8 @@ body{
 }
 
  
+
+
+
+
 </style>
