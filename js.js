@@ -218,15 +218,15 @@ const highlightSchemes = {
         bg: "#141414",
         text: "#008529"
     },
-    red: {
+    orange: {
         bg: "#141414",
-        text: "#DAA520"
+        text: "#c45f00"
     },
     purple: {
         bg: "#141414",
         text: "#7b1fa2"
     },
-    dark: {
+    lightgreen: {
         bg: "#141414",
         text: "#00ff99"
     }
