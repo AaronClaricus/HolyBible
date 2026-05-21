@@ -652,13 +652,10 @@ const NAVIGATION = [
 	]
 ];
 
-
 // ==========================================
 // FRAME CONFIG
 // ==========================================
-
 const FRAMES = [
-
     ["frameB", "LEFT"],
     ["frameC", "CENTER"],
     ["frameD", "RIGHT"]
@@ -667,89 +664,59 @@ const FRAMES = [
 // ==========================================
 // RECURSIVE BUILDER
 // ==========================================
-
 function createTree(node){
-
     const li = document.createElement("li");
-
     // ======================================
     // BOOK
     // ["Matthew", "./Gospel/Matthew"]
     // ======================================
-
     if(typeof node[1] === "string"){
-
         const button = document.createElement("button");
-
         button.className = "toggle";
         button.textContent = "▶ " + node[0];
-
         li.appendChild(button);
-
         const nested = document.createElement("ul");
         nested.className = "nested";
-
 		FRAMES.forEach(frame => {
-
 			const frameLi =
 				document.createElement("li");
-
 			// ==============================
 			// CENTER PANEL ITEMS
 			// ==============================
-
 			if(frame[0] === "frameC"){
-
 				frameLi.classList.add(
 					"center-item"
 				);
 			}
-
 			const link =
 				document.createElement("span");
-
 			link.className = "file-link";
-
 			link.dataset.frame = frame[0];
 			link.dataset.file = node[1];
-
 			link.textContent =
 				frame[1] + " : " + node[0];
-
 			frameLi.appendChild(link);
-
 			nested.appendChild(frameLi);
 		});
-
         li.appendChild(nested);
-
         return li;
     }
-
     // ======================================
     // CATEGORY
     // ["Gospel", [...], [...]]
     // ======================================
-
     const button = document.createElement("button");
-
     button.className = "toggle";
     button.textContent = "▶ " + node[0];
-
     li.appendChild(button);
-
     const nested = document.createElement("ul");
     nested.className = "nested";
-
     for(let i = 1; i < node.length; i++){
-
         nested.appendChild(
             createTree(node[i])
         );
     }
-
     li.appendChild(nested);
-
     return li;
 }
 // ==========================================
@@ -757,92 +724,61 @@ function createTree(node){
 // ==========================================
 
 function buildNavigation(containerId, data){
-
     const container =
         document.getElementById(containerId);
-
     const ul = document.createElement("ul");
-
     data.forEach(node => {
-
         ul.appendChild(
             createTree(node)
         );
-
     });
-
     container.appendChild(ul);
 }
 // ==========================================
 // INIT
 // ==========================================
-
 document.addEventListener("DOMContentLoaded", () => {
-
     buildNavigation("navA", NAVIGATION);
-
 });
 // ==========================================
 // TOGGLE
 // ==========================================
-
 document.addEventListener("click", function(e){
-
     console.log("CLICK");
-
     if(
         !e.target.classList.contains("toggle")
     ){
         return;
     }
-
     console.log("TOGGLE CLICKED");
-
     const nested =
         e.target.parentElement.querySelector(".nested");
-
     console.log(nested);
-
     if(!nested) return;
-
     if(
         nested.classList.contains("open")
     ){
-
         nested.classList.remove("open");
-
         e.target.textContent =
             e.target.textContent.replace("▼","▶");
-
     }else{
-
         nested.classList.add("open");
-
         e.target.textContent =
             e.target.textContent.replace("▶","▼");
     }
-
 });
-
 // ==========================================
 // FILE LINKS
 // ==========================================
-
 document.addEventListener("click", e => {
-
     const link =
         e.target.closest(".file-link");
-
     if(!link) return;
-
     const frame =
         document.getElementById(
             link.dataset.frame
         );
-
     if(!frame) return;
-
     frame.src =
         link.dataset.file + ".html";
-
 });
