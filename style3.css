@@ -243,4 +243,7 @@ body.two-panel #titleC{
 html, body{
     background:#000 !important;
 }
+body.two-panel .center-item{
+    display:none;
+}
 </style>
