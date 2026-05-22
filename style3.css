@@ -1,15 +1,10 @@
-<style>
 :root{
-    --nav-width:240px;
     --font-size:12px;
     --bg:#111;
     --navbg:#181818;
     --border:#333;
     --hover:#232a36;
     --text:#E0E0E0;
-}
-:root.nav-collapsed{
-    --nav-width:60px;
 }
 *{
     box-sizing:border-box;
@@ -34,46 +29,27 @@ body{
    MAIN LAYOUT
 ========================= */
 #main{
-    width:100vw;
+    width:100%;
     height:100vh;
     overflow:hidden;
 }
 #main.nav-collapsed{
     --nav-width:60px;
 }
-#frameArea,
-#content{
-    display:flex;
-    flex:1;
-    width:100%;
-    height:100%;
-    overflow:hidden;
-}
 /* =========================
    NAVIGATION
 ========================= */
 .nav-column,
 #navA{
-    width:240px;
-    min-width:100px;
-    max-width:240px;
-    flex-shrink:0;
     overflow-y:auto;
-    resize:horizontal;
     background:#111111 !important;
     color:#E0E0E0;
     border-right:1px solid #333;
     padding:10px;
        height:100%;
 }
-#navA{
-    padding-left:4px;
-    width:var(--nav-width);
-    
-}
 .nav-controls{
     display:flex;
-
     flex-direction:column;
     gap:8px;
     margin-bottom:14px;
@@ -139,17 +115,15 @@ li{
     margin:10px 0;
     border-bottom:1px solid #FFF;
 }
-
-
-
-
-
-
 /* =========================
    FRAMES
 ========================= */
-
-
+iframe{
+    display:block;
+    width:100%;
+    height:calc(100vh - 32px);
+    border:none;
+}
 .iframe-title{
     padding:8px 12px;
     background:#141414;
@@ -157,127 +131,45 @@ li{
     font-size:14px;
     font-weight:bold;
     border-bottom:1px solid var(--border);
-    user-select:none;
-    transition:
-        opacity 0.75s ease,
-        background 0.35s ease;
-}
-/* =========================
-   TITLES
-========================= */
-#titles{
+    height:32px;
+	color:#E0E0E0 !important;
+    padding:10px;
+    margin:0;
+    padding:0 10px;
+    overflow:hidden;
+    align-items:center;
     display:flex;
-    width:100%;
 }
-#titles div{
-    flex:1 1 0;
-    text-align:center;
-}
-
-/* =========================
-   NEW CSS
-========================= */
-.frame-wrapper{
-      width:100%;
-    min-width:0;
-}
-
-
-
-#layouttable {
-padding: 0px;
-vertical-align:top;
-
-}
-
 /* =========================================
    TABLE
 ========================================= */
-#layouttable{
-    width:100%;
-    height:100%;
-    border-collapse:collapse;
+#layouttable {
+	width:100%;
+    height:100vh;
     table-layout:fixed;
-     border-collapse:collapse;
+	padding: 0px;
+	vertical-align:top;
+	border-collapse:collapse;
     border-spacing:0;
+    overflow:hidden;
 }
 #layouttableframes1 {
 width:240px;
 }
-/* =========================================
-   TITLE ROW
-========================================= */
-
-.iframe-title{
-    height:32px;
-    line-height:32px;
-	color:#E0E0E0 !important;
-    padding:0 10px;
-    font-size:14px;
-    font-weight:bold;
-    overflow:hidden;
-    white-space:nowrap;
-    text-overflow:ellipsis;
-}
-/* =========================================
-   IFRAME ROW
-========================================= */
-#layouttable tr:first-child{
-    height:32px;
-}
-#layouttable tr:last-child{
-    height:calc(100vh - 32px);
-}
-/* iframe cells */
 #layouttable tr td{
-    height:100%;
-    padding: 0px;
-    margin:0px;
+    vertical-align:top;
 }
 /* =========================================
-   IFRAMES
+   3 to 2 panel mode
 ========================================= */
-iframe{
-    display:block;
-    width:100%;
-    height:100%;
-    border:none;
-    margin:0px;
-   padding: 0px;
-}
 /* NORMAL 3 PANEL */
 .center-col{
-    width:33.333%-240px;
+    width: auto;
 }
 /* TWO PANEL MODE */
 body.two-panel .center-col{
     display:none;
 }
-body.two-panel #frameB,
-body.two-panel #frameD{
-    width:50%-120px;
+*{
+    outline:1px solid red;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</style>
