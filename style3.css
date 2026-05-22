@@ -247,7 +247,7 @@ iframe{
 }
 /* NORMAL 3 PANEL */
 .center-col{
-    width:33.333%;
+    width:33.333%-240px;
 }
 /* TWO PANEL MODE */
 body.two-panel .center-col{
@@ -255,7 +255,7 @@ body.two-panel .center-col{
 }
 body.two-panel #frameB,
 body.two-panel #frameD{
-    width:50%;
+    width:50%-120px;
 }
 
 
