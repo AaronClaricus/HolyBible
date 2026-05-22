@@ -782,6 +782,3 @@ document.addEventListener("click", e => {
     frame.src =
         link.dataset.file + ".html";
 });
-
-
-

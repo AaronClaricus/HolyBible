@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html style="visibility:hidden;">
+<head>
+<meta charset="UTF-8">
+
+<style>
+
+html,
+body{
+    margin:0;
+    padding:0.5em;
+    width:100%;
+    height:100%;
+    overflow:auto;
+    font-family:monospace;
+    font-size:__FONT_SIZE__;
+    white-space:pre-wrap;
+    overflow-wrap:break-word;
+    word-break:break-word;
+    line-height:1.4;
+    background:#000;
+    color:#E0E0E0;
+    box-sizing:border-box;
+    visibility:hidden;
+}
+
+html.ready{
+    visibility:visible;
+}
+
+</style>
+</head>
+
+<body>
+
+<script>0</script>
+
+__CONTENT__
+
+<noscript>
+<style>
+body{
+    visibility:visible;
+}
+</style>
+</noscript>
+
+<script>
+
+function showPage(){
+
+    document.body.style.visibility = "visible";
+    document.documentElement.classList.add("ready");
+
+}
+
+if(
+    document.readyState === "complete" ||
+    document.readyState === "interactive"
+){
+    showPage();
+}
+else{
+    document.addEventListener(
+        "DOMContentLoaded",
+        showPage,
+        { once:true }
+    );
+}
+
+</script>
+
+</body>
+</html>
