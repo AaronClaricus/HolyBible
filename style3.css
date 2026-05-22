@@ -54,7 +54,7 @@ body{
 ========================= */
 .nav-column,
 #navA{
-    width:300px;
+    width:240px;
     min-width:100px;
     max-width:240px;
     flex-shrink:0;
@@ -64,6 +64,7 @@ body{
     color:#E0E0E0;
     border-right:1px solid #333;
     padding:10px;
+       height:100%;
 }
 #navA{
     padding-left:4px;
@@ -142,57 +143,13 @@ li{
 
 
 
-.mainwrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
-.iframe-title1{
-    padding:8px 12px;
-    background:#141414;
-    color:#ffffff;
-    font-size:14px;
-    font-weight:bold;
-    width:500px;
-    border-bottom:1px solid var(--border);
-    user-select:none;
-    transition:
-        opacity 0.75s ease,
-        background 0.35s ease;
-}
 
 
 /* =========================
    FRAMES
 ========================= */
-.frame-wrapper{
-    display:flex;
-    flex-direction:column;
-
-    height:100%;
-    transition:
-        flex 0.35s ease,
-        width 0.35s ease,
-        opacity 0.75s ease;
-}
-.frame-wrapper:after{
-  content: "";
-  display: table;
-  clear: both;
-}
-.reader-frame,
-iframe,
-#content iframe{
 
 
-    height:100%;
-    min-width:0;
-    border:none;
-    background:#000;
-    transition:
-        width 0.35s ease,
-        opacity 0.75s ease;
-}
 .iframe-title{
     padding:8px 12px;
     background:#141414;
@@ -216,88 +173,17 @@ iframe,
     flex:1 1 0;
     text-align:center;
 }
-.iframe-title{
-    padding:8px 12px;
-    background:#141414;
-    color:#E0E0E0 !important;
-    font-size:14px;
-    font-weight:bold;
-    border-bottom:1px solid #333;
-    user-select:none;
-}
 
 /* =========================
-   PANEL TRANSITIONS
+   NEW CSS
 ========================= */
-.frame-wrapper{
-    flex:1 1 0;
-    min-width:0;
-    overflow:hidden;
-    transition:
-        flex 0.35s ease,
-        opacity 0.75s ease,
-        transform 0.35s ease;
-        
-}
-/* CENTER PANEL */
-.center-wrapper{
-    opacity:1;
-    transform:scaleX(1);
-    transition:
-        flex 0.35s ease,
-        opacity 0.75s ease,
-        transform 0.35s ease;
-}
-/* =========================
-   TWO PANEL MODE
-========================= */
-body.two-panel .center-wrapper{
-    flex:0 0 0 !important;
-    width:0 !important;
-    min-width:0 !important;
-    opacity:0;
-    transform:scaleX(0.92);
-    pointer-events:none;
-    overflow:hidden;
-}
-/* OPTIONAL */
-body.two-panel .center-link,
-body.two-panel #titleC{
-    opacity:0;
-    transition:opacity 0.75s ease;
-}
-html, body{
-    background:#000 !important;
-}
-body.two-panel .center-item{
-    display:none;
-}
-
-
-
-#main > * { min-width:0; }
-
-
-
-
-
-
-
-
-
-
-
-
 .frame-wrapper{
       width:100%;
     min-width:0;
 }
 
-iframe{
-      width:100%;
-    min-width:0;
-    height: 100%;
-}
+
+
 #layouttable {
 padding: 0px;
 vertical-align:top;
@@ -307,54 +193,16 @@ vertical-align:top;
 /* =========================================
    TABLE
 ========================================= */
-
 #layouttable{
     width:100%;
     height:100%;
     border-collapse:collapse;
     table-layout:fixed;
-}
-
-/* force top alignment */
-#layouttable td,
-#layouttable th{
-    vertical-align:top;
-    padding:0;
-    margin:0;
+     border-collapse:collapse;
+    border-spacing:0;
 }
 #layouttableframes1 {
 width:240px;
-
-
-}
-
-#layouttableframes {
-width:100%-60px;
-
-
-}
-
-#layouttable{
-    border-collapse:collapse;
-    border-spacing:0;
-}
-#layouttable td,
-#layouttable th{
-    padding:0;
-    margin:0;
-}
-
-
-#layouttable{
-    height:100vh;
-}
-
-#layouttable td{
-    height:100%;
-}
-
-#navA{
-    height:100%;
 }
 /* =========================================
    TITLE ROW
@@ -363,71 +211,66 @@ width:100%-60px;
 .iframe-title{
     height:32px;
     line-height:32px;
-
+	color:#E0E0E0 !important;
     padding:0 10px;
-
     font-size:14px;
     font-weight:bold;
-
     overflow:hidden;
     white-space:nowrap;
     text-overflow:ellipsis;
 }
-
-/* make title row small */
-#layouttable tr:first-child{
-    height:32px;
-}
-
 /* =========================================
    IFRAME ROW
 ========================================= */
-
-/* iframe row takes remaining height */
+#layouttable tr:first-child{
+    height:32px;
+}
 #layouttable tr:last-child{
     height:calc(100vh - 32px);
 }
-
 /* iframe cells */
-#layouttable tr:last-child td{
+#layouttable tr td{
     height:100%;
+    padding: 0px;
+    margin:0px;
 }
-
 /* =========================================
    IFRAMES
 ========================================= */
-
 iframe{
     display:block;
-
     width:100%;
     height:100%;
-
     border:none;
-    margin:0;
-    padding:0;
+    margin:0px;
+   padding: 0px;
 }
-
-
-
-
-
-
 /* NORMAL 3 PANEL */
 .center-col{
-    width:33.333%-60px;
+    width:33.333%;
 }
-
 /* TWO PANEL MODE */
 body.two-panel .center-col{
     display:none;
 }
-
-
 body.two-panel #frameB,
 body.two-panel #frameD{
-    width:50%-120px;
+    width:50%;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
