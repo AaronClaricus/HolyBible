@@ -343,6 +343,19 @@ width:100%-60px;
     padding:0;
     margin:0;
 }
+
+
+#layouttable{
+    height:100vh;
+}
+
+#layouttable td{
+    height:100%;
+}
+
+#navA{
+    height:100%;
+}
 /* =========================================
    TITLE ROW
 ========================================= */
@@ -394,6 +407,33 @@ iframe{
     margin:0;
     padding:0;
 }
+
+
+
+
+
+
+/* NORMAL 3 PANEL */
+.center-col{
+    width:33.333%-60px;
+}
+
+/* TWO PANEL MODE */
+body.two-panel .center-col{
+    display:none;
+}
+
+
+body.two-panel #frameB,
+body.two-panel #frameD{
+    width:50%-120px;
+}
+
+
+
+
+
+
 
 
 
