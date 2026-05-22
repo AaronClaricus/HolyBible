@@ -1,4 +1,4 @@
-window.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("load", function () {
 
     console.log("SCRIPT LOADED");
 
@@ -32,20 +32,19 @@ window.addEventListener("DOMContentLoaded", function () {
     const navA = document.getElementById("navA");
     const navC = document.getElementById("navC");
     const main = document.getElementById("main");
-    function updateGrid(){
-        const widthA = navA ? navA.offsetWidth : 240;
-        const widthC = navC ? navC.offsetWidth : 240;
-        // fallback-safe layout (you only have 3 columns)
-        if(main){
-            main.style.gridTemplateColumns =
-                widthA + "px 1fr 1fr";
-        }
-    }
+ function updateGrid(){
+    if(!main) return;
+
+    const widthA = navA?.getBoundingClientRect().width ?? 240;
+    const widthC = navC?.getBoundingClientRect().width ?? 240;
+
+    main.style.gridTemplateColumns = `${widthA}px 1fr 1fr`;
+}
     const resizeObserver = new ResizeObserver(updateGrid);
     if(navA) resizeObserver.observe(navA);
     if(navC) resizeObserver.observe(navC);
     window.addEventListener("resize", updateGrid);
-    updateGrid();
+    requestAnimationFrame(updateGrid);
 });
 // ==============================
 // LOAD TEXT INTO IFRAMES
@@ -61,6 +60,7 @@ function buildTextHTML(text){
 <head>
 <meta charset="UTF-8">
 <style>
+
 html, body{
     margin:0;
     padding:0.5em;
@@ -79,7 +79,8 @@ html, body{
 }
 </style>
 </head>
-<body>
+<body style="visibility: hidden;">
+ <script>0</script>
 ${text && text.trim()
     ? escapeHTML(text)
     : `
@@ -95,7 +96,20 @@ ${text && text.trim()
     Click a navigation item to load content.
 </div>
 `}
+<noscript><style>body { visibility: visible; }</style></noscript>
 </body>
+<script>
+let domReady = (cb) => {
+  document.readyState === 'interactive' || document.readyState === 'complete'
+    ? cb()
+    : document.addEventListener('DOMContentLoaded', cb);
+};
+
+domReady(() => {
+  // Display body when DOM is loaded
+  document.body.style.visibility = 'visible';
+});
+</script>
 </html>
 `;
 }
