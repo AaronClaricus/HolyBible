@@ -5,7 +5,7 @@
 const NAVIGATION = [
 
  	[
-		"New Unauthorized WEB 2020: New Testament",
+		"New Unauthorized WEB 2020/2026N: New Testament",
 
 		[
 			"Gospel",
@@ -61,7 +61,7 @@ const NAVIGATION = [
 	],
 
 	[
-		"New Unauthorized WEB 2020: Old Testament",
+		"New Unauthorized WEB 2020/2026N: Old Testament",
 
 		[
 			"Law",
