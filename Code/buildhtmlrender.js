@@ -230,7 +230,11 @@ console.log("B");
 
         const text =
             await response.text();
+		const doc = iframe.contentDocument;
 
+		console.log(
+			doc.getElementById("content")
+		);
         // ==============================
         // HIGHLIGHT SCHEME
         // ==============================
@@ -271,7 +275,7 @@ console.log("C");
             },
             { once: true }
         );
-console.log("D");
+
         // ==============================
         // LOAD CONTENT
         // ==============================
