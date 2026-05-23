@@ -171,3 +171,6 @@ body.two-panel .center-col{
     display:none;
 }
 
+mark, .highlight {
+    background: var(--highlight-color, yellow);
+}
