@@ -21,9 +21,9 @@ window.addEventListener("load", function () {
     // ==============================
     // DEFAULT LOAD
     // ==============================
-    loadTextFile("frameB", "./Introduction");
+    loadTextFile("frameB", "./General Sources/Introduction");
     loadTextFile("frameC", "./Gospel/John");
-    loadTextFile("frameD", "./Resources");
+    loadTextFile("frameD", "./General Sources/Resources");
 
     // ==============================
     // GRID SETUP
@@ -62,7 +62,7 @@ async function initTemplate(){
     if(TEMPLATE_HTML) return;
 
     const response =
-        await fetch("./template.html");
+        await fetch("./Code/template.html");
 
     TEMPLATE_HTML =
         await response.text();
@@ -116,9 +116,9 @@ function escapeHTML(str){
 // TRACK CURRENT FILES
 // ==============================
 const currentFiles = {
-    frameB: "./Introduction",
+    frameB: "./General Sources/Introduction",
     frameC: "./Gospel/John",
-    frameD: "./Resources"
+    frameD: "./General Sources/Resources"
 };
 
 
