@@ -70,9 +70,20 @@ function escapeHTML(str){
         .replace(/>/g,"&gt;");
 }
 // ==============================
+// TRACK CURRENT FILES
+// ==============================
+const currentFiles = {
+    frameB: "./Introduction",
+    frameC: "./Gospel/John",
+    frameD: "./Resources"
+};
+// ==============================
 // LOAD FILE INTO IFRAME
 // ==============================
 async function loadTextFile(frameId, file){
+
+    currentFiles[frameId] = file;
+
     try{
         await initTemplate();
 
@@ -82,25 +93,26 @@ async function loadTextFile(frameId, file){
         const iframe = document.getElementById(frameId);
 
         const selected =
-		document.getElementById("highlightSelector").value;
+            document.getElementById("highlightSelector").value;
 
-		const scheme =
-		highlightSchemes[selected];
+        const scheme =
+            highlightSchemes[selected];
 
         if(iframe){
-            const highlight =
-			document.getElementById("highlightSelector").value;
-			iframe.srcdoc =
-			buildTextHTML(text, scheme);
+
+            iframe.srcdoc =
+                buildTextHTML(text, scheme);
+
             updateIframeTitle(frameId, file);
         }
 
     } catch(error){
+
         const iframe = document.getElementById(frameId);
 
         if(iframe){
             iframe.srcdoc =
-                buildTextHTML("ERROR", "green");
+                buildTextHTML("ERROR", highlightSchemes.green);
         }
     }
 }

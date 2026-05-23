@@ -1,4 +1,3 @@
-
 // ==============================
 // CHANGE FONT BACKGROUND COLOR WHEN HIGHLIGHTED DYNAMIC
 // ==============================
@@ -30,18 +29,16 @@ const highlightSchemes = {
         text: "#00ff99"
     }
 };
-
-
 // ==============================
-// RELOAD IFRAMES ON HIGHLIGHT CHANGE
+// RELOAD CURRENT FILES
 // ==============================
 highlightSelector.addEventListener(
     "change",
     function(){
 
-        loadTextFile("frameB", "./Introduction");
-        loadTextFile("frameC", "./Gospel/John");
-        loadTextFile("frameD", "./Resources");
+        loadTextFile("frameB", currentFiles.frameB);
+        loadTextFile("frameC", currentFiles.frameC);
+        loadTextFile("frameD", currentFiles.frameD);
 
     }
 );
