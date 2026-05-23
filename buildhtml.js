@@ -1,27 +1,40 @@
 window.addEventListener("load", function () {
+
     console.log("SCRIPT LOADED");
+
     // ==============================
     // FILE LINK HANDLERS
     // ==============================
     document.querySelectorAll(".file-link").forEach(function(link){
+
         link.addEventListener("click", function(){
-            loadTextFile(this.dataset.frame, this.dataset.file);
+
+            loadTextFile(
+                this.dataset.frame,
+                this.dataset.file
+            );
+
         });
+
     });
+
     // ==============================
-    // DEFAULT LOAD (FIXED ISSUE)
+    // DEFAULT LOAD
     // ==============================
     loadTextFile("frameB", "./Introduction");
     loadTextFile("frameC", "./Gospel/John");
     loadTextFile("frameD", "./Resources");
+
     // ==============================
-    // GRID SETUP (SAFE VERSION)
+    // GRID SETUP
     // ==============================
     const navA = document.getElementById("navA");
     const navC = document.getElementById("navC");
     const main = document.getElementById("main");
 
 });
+
+
 // ==============================
 // SCROLL STORAGE
 // ==============================
@@ -30,19 +43,39 @@ const iframeScrollPositions = {
     frameC: 0,
     frameD: 0
 };
+
+
+
+const iframeState = {
+    frameB: { scrollTop: 0 },
+    frameC: { scrollTop: 0 },
+    frameD: { scrollTop: 0 }
+};
+
+
+
+
 // ==============================
 // TEMPLATE CACHE
 // ==============================
 let TEMPLATE_HTML = "";
+
+
 // ==============================
 // LOAD TEMPLATE ONCE
 // ==============================
 async function initTemplate(){
-    if (TEMPLATE_HTML) return;
 
-    const response = await fetch("./template.html");
-    TEMPLATE_HTML = await response.text();
+    if(TEMPLATE_HTML) return;
+
+    const response =
+        await fetch("./template.html");
+
+    TEMPLATE_HTML =
+        await response.text();
 }
+
+
 // ==============================
 // BUILD HTML
 // ==============================
@@ -55,9 +88,15 @@ function buildTextHTML(text, scheme){
     const content =
         text && text.trim()
             ? escapeHTML(text)
-            : `<div style="border:2px dashed #666;padding:1em;color:#aaa;">
-                EMPTY FRAME
-               </div>`;
+            : `
+                <div style="
+                    border:2px dashed #666;
+                    padding:1em;
+                    color:#aaa;
+                ">
+                    EMPTY FRAME
+                </div>
+            `;
 
     return TEMPLATE_HTML
         .replaceAll("__FONT_SIZE__", size)
@@ -65,15 +104,21 @@ function buildTextHTML(text, scheme){
         .replaceAll("__HIGHLIGHT_TEXT__", scheme.text)
         .replace("__CONTENT__", content);
 }
+
+
 // ==============================
 // HTML ESCAPE
 // ==============================
 function escapeHTML(str){
+
     return String(str)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;");
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+
 }
+
+
 // ==============================
 // TRACK CURRENT FILES
 // ==============================
@@ -83,22 +128,73 @@ const currentFiles = {
     frameD: "./Resources"
 };
 
+
 // ==============================
-// UPDATE IFRAME TITLE FUNCTION
+// UPDATE IFRAME TITLE
 // ==============================
-function updateIframeTitle(frameId, filePath) {
+function updateIframeTitle(frameId, filePath){
+
     const titleMap = {
         frameB: "titleB",
         frameC: "titleC",
         frameD: "titleD"
     };
 
-    const titleBar = document.getElementById(titleMap[frameId]);
-    if (!titleBar) return;
+    const titleBar =
+        document.getElementById(titleMap[frameId]);
 
-    const fileName = filePath.split("/").pop();
-    titleBar.textContent = fileName;
+    if(!titleBar) return;
+
+    const fileName =
+        filePath.split("/").pop();
+
+    titleBar.textContent =
+        fileName;
+
 }
+
+
+// ==============================
+// SAVE CURRENT SCROLL POSITION
+// ==============================
+function saveScrollPosition(frameId) {
+
+    const iframe =
+        document.getElementById(frameId);
+
+    if (!iframe) return;
+
+    try {
+
+        const win =
+            iframe.contentWindow;
+
+        const doc =
+            iframe.contentDocument;
+
+        if (!win || !doc) return;
+
+        const scrollEl =
+            doc.scrollingElement ||
+            doc.documentElement ||
+            doc.body;
+
+        iframeScrollPositions[frameId] =
+            win.scrollY ||
+            scrollEl.scrollTop ||
+            0;
+
+    } catch (err) {
+
+        console.warn(
+            "Scroll save failed:",
+            err
+        );
+
+    }
+
+}
+
 
 // ==============================
 // LOAD FILE INTO IFRAME
@@ -108,67 +204,152 @@ async function loadTextFile(frameId, file){
     // ==============================
     // SAVE OLD SCROLL POSITION
     // ==============================
-    const oldIframe =
-        document.getElementById(frameId);
-
-    if(
-        oldIframe &&
-        oldIframe.contentWindow
-    ){
-        try{
-			iframeScrollPositions[frameId] =
-			oldIframe.contentDocument?.documentElement?.scrollTop || 0;
-        } catch(e){}
-    }
+    saveScrollPosition(frameId);
 
     currentFiles[frameId] = file;
 
     try{
 
+        // ==============================
+        // LOAD TEMPLATE
+        // ==============================
         await initTemplate();
 
+        // ==============================
+        // FETCH FILE
+        // ==============================
         const response =
             await fetch(file);
 
         const text =
             await response.text();
 
+        // ==============================
+        // GET IFRAME
+        // ==============================
         const iframe =
             document.getElementById(frameId);
 
+        if(!iframe) return;
+
+        // ==============================
+        // GET HIGHLIGHT SCHEME
+        // ==============================
         const selected =
-            document.getElementById("highlightSelector").value;
+            document.getElementById("highlightSelector")
+                ?.value;
 
-const scheme =
-    (highlightSchemes && highlightSchemes[selected]) ||
-    { bg: "#000", text: "#fff" };
+        const scheme =
+            (
+                highlightSchemes &&
+                highlightSchemes[selected]
+            ) || {
+                bg: "#000",
+                text: "#fff"
+            };
 
-        if(iframe){
+        // ==============================
+        // LOAD CONTENT
+        // ==============================
+        iframe.srcdoc =
+            buildTextHTML(
+                text,
+                scheme
+            );
 
-            iframe.srcdoc =
-                buildTextHTML(text, scheme);
+        // ==============================
+        // AFTER LOAD
+        // ==============================
+iframe.onload = function () {
 
-            // ==============================
-            // RESTORE SCROLL AFTER LOAD
-            // ==============================
- iframe.onload = function () {
-    const doc = iframe.contentDocument;
-    if (!doc) return;
+    const doc =
+        iframe.contentDocument;
 
-    const scrollY = iframeScrollPositions[frameId] || 0;
+    const win =
+        iframe.contentWindow;
 
-    requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-            const root = doc.documentElement || doc.body;
-            root.scrollTop = scrollY;
-        });
-    });
-};
+    if (!doc || !win) return;
 
-            updateIframeTitle(frameId, file);
+    const scrollEl =
+        doc.scrollingElement ||
+        doc.documentElement ||
+        doc.body;
+
+    // ==========================
+    // RESTORE SCROLL
+    // ==========================
+    const target =
+        iframeScrollPositions[frameId] || 0;
+
+    let restoreCount = 0;
+
+    function restoreLoop() {
+
+        win.scrollTo(0, target);
+        scrollEl.scrollTop = target;
+
+        restoreCount++;
+
+        if (restoreCount < 25) {
+
+            requestAnimationFrame(
+                restoreLoop
+            );
+
         }
 
+    }
+
+    restoreLoop();
+
+    // ==========================
+    // REMOVE OLD LISTENER
+    // ==========================
+    if (iframe._scrollHandler) {
+
+        win.removeEventListener(
+            "scroll",
+            iframe._scrollHandler
+        );
+
+    }
+
+    // ==========================
+    // TRACK SCROLL
+    // ==========================
+    iframe._scrollHandler =
+        function () {
+
+            iframeScrollPositions[frameId] =
+                win.scrollY ||
+                scrollEl.scrollTop ||
+                0;
+
+        };
+
+    win.addEventListener(
+        "scroll",
+        iframe._scrollHandler,
+        { passive: true }
+    );
+
+};
+
+ 
+        // ==============================
+        // UPDATE TITLE
+        // ==============================
+        updateIframeTitle(
+            frameId,
+            file
+        );
+
     } catch(error){
+
+        console.error(
+            "LOAD ERROR:",
+            error
+        );
 
         const iframe =
             document.getElementById(frameId);
@@ -180,7 +361,9 @@ const scheme =
                     "ERROR",
                     highlightSchemes.green
                 );
-        }
-    }
-}
 
+        }
+
+    }
+
+}
