@@ -172,10 +172,7 @@ function saveScrollPosition(frameId) {
             doc.documentElement ||
             doc.body;
 
-        iframeScrollPositions[frameId] =
-            win.scrollY ||
-            scrollEl.scrollTop ||
-            0;
+   
 
     } catch (err) {
 
@@ -196,10 +193,12 @@ async function loadTextFile(frameId, file) {
 
     const iframe = document.getElementById(frameId);
     if (!iframe) return;
-	if (iframe._scrollHandler && iframe._scrollCleanup) {
-    iframe._scrollCleanup();
+	if (iframe._scrollCleanup) {
+		iframe._scrollCleanup();
+		iframe._scrollCleanup = null;
+		iframe._scrollHandler = null;
 	}
-    
+		
     currentFiles[frameId] = file;
 
     try {
@@ -219,51 +218,48 @@ async function loadTextFile(frameId, file) {
             };
 
         // clean old handler
-  
+		iframe.onload = null;
         iframe.onload = function () {
 
-            const doc = iframe.contentDocument;
-            const win = iframe.contentWindow;
+		const doc = iframe.contentDocument;
+		const win = iframe.contentWindow;
 
-            if (!doc || !win) return;
+		if (!doc || !win) return;
 
-            const scrollEl =
-                doc.scrollingElement || doc.documentElement || doc.body;
+		const scrollEl =
+			doc.scrollingElement || doc.documentElement || doc.body;
 
-            const target = iframeScrollPositions[frameId] || 0;
+		const target = iframeScrollPositions[frameId] || 0;
 
-			let i = 0;
+		let i = 0;
 
-			function restore() {
-				scrollEl.scrollTop = target;
+		function restore() {
+			scrollEl.scrollTop = target;
 
-				if (++i < 20) {
-					requestAnimationFrame(restore);
-				}
-			}
-
-			setTimeout(() => {
+			if (++i < 20) {
 				requestAnimationFrame(restore);
-			}, 0);
+			}
+		}
 
-			iframe._scrollHandler = function () {
-				iframeScrollPositions[frameId] = scrollEl.scrollTop;
-			};
+		requestAnimationFrame(() => {
+			requestAnimationFrame(restore);
+		});
 
-			const handler = iframe._scrollHandler;
+		iframe._scrollHandler = function () {
+			iframeScrollPositions[frameId] = scrollEl.scrollTop;
+		};
 
-			win.addEventListener("scroll", handler, { passive: true });
-			doc.addEventListener("scroll", handler, { passive: true });
+		const handler = iframe._scrollHandler;
 
-			// store cleanup
-			iframe._scrollCleanup = () => {
-				win.removeEventListener("scroll", handler);
-				doc.removeEventListener("scroll", handler);
-			};
-        };
-		iframeScrollPositions[frameId] =
-		iframeScrollPositions[frameId] || 0;
-		saveScrollPosition(frameId);
+		win.addEventListener("scroll", handler, { passive: true });
+		doc.addEventListener("scroll", handler, { passive: true });
+
+		iframe._scrollCleanup = () => {
+			win.removeEventListener("scroll", handler);
+			doc.removeEventListener("scroll", handler);
+		};
+	};
+
         iframe.srcdoc = buildTextHTML(text, scheme);
 
         updateIframeTitle(frameId, file);
