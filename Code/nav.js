@@ -126,61 +126,7 @@ const NAVIGATION = [
 		]
 
     ],
-		[
-			"Textus Receptus Greek New Testament",
-
-			[
-				"Gospel",
-
-				["Matthew", "./Gospel/Matthew Greek"],
-				["Mark", "./Gospel/Mark Greek"],
-				["Luke", "./Gospel/Luke Greek"],
-				["John", "./Gospel/John Greek"]
-			],
-
-			[
-				"Pauline Epistles",
-
-				["Romans", "./Epistles/Romans Greek"],
-				["1 Corinthians", "./Epistles/1 Corinthians Greek"],
-				["2 Corinthians", "./Epistles/2 Corinthians Greek"],
-				["Galatians", "./Epistles/Galatians Greek"],
-				["Ephesians", "./Epistles/Ephesians Greek"],
-				["Philippians", "./Epistles/Philippians Greek"],
-				["Colossians", "./Epistles/Colossians Greek"],
-				["1 Thessalonians", "./Epistles/1 Thessalonians Greek"],
-				["2 Thessalonians", "./Epistles/2 Thessalonians Greek"],
-				["1 Timothy", "./Epistles/1 Timothy Greek"],
-				["2 Timothy", "./Epistles/2 Timothy Greek"],
-				["Titus", "./Epistles/Titus Greek"],
-				["Philemon", "./Epistles/Philemon Greek"],
-				["Hebrews", "./Epistles/Hebrews Greek"]
-			],
-
-			[
-				"Epistles",
-
-				["James", "./Epistles/James Greek"],
-				["1 Peter", "./Epistles/1 Peter Greek"],
-				["2 Peter", "./Epistles/2 Peter Greek"],
-				["1 John", "./Epistles/1 John Greek"],
-				["2 John", "./Epistles/2 John Greek"],
-				["3 John", "./Epistles/3 John Greek"],
-				["Jude", "./Epistles/Jude Greek"]
-			],
-
-			[
-				"History",
-
-				["Acts", "./History/Acts Greek"]
-			],
-
-			[
-				"Prophecy",
-
-				["Revelation", "./Prophets/Revelation Greek"]
-			]
-		],
+	
 	[
 		"Berean Greek-English Interlinear New Testament",
 
