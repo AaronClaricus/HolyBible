@@ -4,128 +4,125 @@
 
 const NAVIGATION = [
 
-    [
-        "New Unauthorized American Standard Version 1901 Text & 2026 Notation: New Testament",
+ 	[
+		"New Unauthorized WEB 2020: New Testament",
 
-        [
-            "Gospel",
+		[
+			"Gospel",
 
-            ["Matthew", "./Gospel/Matthew"],
-            ["Mark", "./Gospel/Mark"],
-            ["Luke", "./Gospel/Luke"],
-            ["John", "./Gospel/John"]
-        ],
+			["Matthew", "./WEB/Gospel/Matthew"],
+			["Mark", "./WEB/Gospel/Mark"],
+			["Luke", "./WEB/Gospel/Luke"],
+			["John", "./WEB/Gospel/John"]
+		],
 
 		[
 			"Pauline Epistles",
 
-			["Romans", "./Epistles/Romans"],
-			["1 Corinthians", "./Epistles/1 Corinthians"],
-			["2 Corinthians", "./Epistles/2 Corinthians"],
-			["Galatians", "./Epistles/Galatians"],
-			["Ephesians", "./Epistles/Ephesians"],
-			["Philippians", "./Epistles/Philippians"],
-			["Colossians", "./Epistles/Colossians"],
-			["1 Thessalonians", "./Epistles/1 Thessalonians"],
-			["2 Thessalonians", "./Epistles/2 Thessalonians"],
-			["1 Timothy", "./Epistles/1 Timothy"],
-			["2 Timothy", "./Epistles/2 Timothy"],
-			["Titus", "./Epistles/Titus"],
-			["Philemon", "./Epistles/Philemon"],
-			["Hebrews", "./Epistles/Hebrews"]
+			["Romans", "./WEB/Epistles/Romans"],
+			["1 Corinthians", "./WEB/Epistles/1 Corinthians"],
+			["2 Corinthians", "./WEB/Epistles/2 Corinthians"],
+			["Galatians", "./WEB/Epistles/Galatians"],
+			["Ephesians", "./WEB/Epistles/Ephesians"],
+			["Philippians", "./WEB/Epistles/Philippians"],
+			["Colossians", "./WEB/Epistles/Colossians"],
+			["1 Thessalonians", "./WEB/Epistles/1 Thessalonians"],
+			["2 Thessalonians", "./WEB/Epistles/2 Thessalonians"],
+			["1 Timothy", "./WEB/Epistles/1 Timothy"],
+			["2 Timothy", "./WEB/Epistles/2 Timothy"],
+			["Titus", "./WEB/Epistles/Titus"],
+			["Philemon", "./WEB/Epistles/Philemon"],
+			["Hebrews", "./WEB/Epistles/Hebrews"]
 		],
-				
 
 		[
-            "Epistles",
+			"Epistles",
 
-            ["James", "./Epistles/James"],
-				["1 Peter", "./Epistles/1 Peter"],
-				["2 Peter", "./Epistles/2 Peter"],
-				["1 John", "./Epistles/1 John"],
-				["2 John", "./Epistles/2 John"],
-				["3 John", "./Epistles/3 John"],
-				["Jude", "./Epistles/Jude"]
-        ],
+			["James", "./WEB/Epistles/James"],
+			["1 Peter", "./WEB/Epistles/1 Peter"],
+			["2 Peter", "./WEB/Epistles/2 Peter"],
+			["1 John", "./WEB/Epistles/1 John"],
+			["2 John", "./WEB/Epistles/2 John"],
+			["3 John", "./WEB/Epistles/3 John"],
+			["Jude", "./WEB/Epistles/Jude"]
+		],
 
-
-        [
-            "History",
-
-            ["Acts", "./History/Acts"]
-        ],
 		[
-            "Prophecy",
+			"History",
 
-            ["Revelation", "./Prophets/Revelation"]
-        ]
+			["Acts", "./WEB/History/Acts"]
+		],
 
-    ],
+		[
+			"Prophecy",
 
-    [
-        "New Unauthorized American Standard Version 1901 Text & 2026 Notation: Old Testament",
+			["Revelation", "./WEB/Prophets/Revelation"]
+		]
+	],
+
+	[
+		"New Unauthorized WEB 2020: Old Testament",
 
 		[
 			"Law",
 
-			["Genesis", "./Law/Genesis"],
-			["Exodus", "./Law/Exodus"],
-			["Leviticus", "./Law/Leviticus"],
-			["Numbers", "./Law/Numbers"],
-			["Deuteronomy", "./Law/Deuteronomy"]
+			["Genesis", "./WEB/Law/Genesis"],
+			["Exodus", "./WEB/Law/Exodus"],
+			["Leviticus", "./WEB/Law/Leviticus"],
+			["Numbers", "./WEB/Law/Numbers"],
+			["Deuteronomy", "./WEB/Law/Deuteronomy"]
 		],
 		[
 			"History",
 
-			["Joshua", "./History/Joshua"],
-			["Judges", "./History/Judges"],
-			["Ruth", "./History/Ruth"],
-			["1 Samuel", "./History/1 Samuel"],
-			["2 Samuel", "./History/2 Samuel"],
-			["1 Kings", "./History/1 Kings"],
-			["2 Kings", "./History/2 Kings"],
-			["1 Chronicles", "./History/1 Chronicles"],
-			["2 Chronicles", "./History/2 Chronicles"],
-			["Ezra", "./History/Ezra"],
-			["Nehemiah", "./History/Nehemiah"],
-			["Esther", "./History/Esther"]
+			["Joshua", "./WEB/History/Joshua"],
+			["Judges", "./WEB/History/Judges"],
+			["Ruth", "./WEB/History/Ruth"],
+			["1 Samuel", "./WEB/History/1 Samuel"],
+			["2 Samuel", "./WEB/History/2 Samuel"],
+			["1 Kings", "./WEB/History/1 Kings"],
+			["2 Kings", "./WEB/History/2 Kings"],
+			["1 Chronicles", "./WEB/History/1 Chronicles"],
+			["2 Chronicles", "./WEB/History/2 Chronicles"],
+			["Ezra", "./WEB/History/Ezra"],
+			["Nehemiah", "./WEB/History/Nehemiah"],
+			["Esther", "./WEB/History/Esther"]
 		],
 		[
 			"Poetry",
 
-			["Job", "./Poetry/Job"],
-			["Psalms", "./Poetry/Psalms"],
-			["Proverbs", "./Poetry/Proverbs"],
-			["Ecclesiastes", "./Poetry/Ecclesiastes"],
-			["Song of Solomon", "./Poetry/Song of Solomon"]
+			["Job", "./WEB/Poetry/Job"],
+			["Psalms", "./WEB/Poetry/Psalms"],
+			["Proverbs", "./WEB/Poetry/Proverbs"],
+			["Ecclesiastes", "./WEB/Poetry/Ecclesiastes"],
+			["Song of Solomon", "./WEB/Poetry/Song of Solomon"]
 		],
 		[
 			"Major Prophets",
 
-			["Isaiah", "./Prophets/Isaiah"],
-			["Jeremiah", "./Prophets/Jeremiah"],
-			["Lamentations", "./Prophets/Lamentations"],
-			["Ezekiel", "./Prophets/Ezekiel"],
-			["Daniel", "./Prophets/Daniel"]
+			["Isaiah", "./WEB/Prophets/Isaiah"],
+			["Jeremiah", "./WEB/Prophets/Jeremiah"],
+			["Lamentations", "./WEB/Prophets/Lamentations"],
+			["Ezekiel", "./WEB/Prophets/Ezekiel"],
+			["Daniel", "./WEB/Prophets/Daniel"]
 		],
 		[
 			"Minor Prophets",
 
-			["Hosea", "./Prophets/Hosea"],
-			["Joel", "./Prophets/Joel"],
-			["Amos", "./Prophets/Amos"],
-			["Obadiah", "./Prophets/Obadiah"],
-			["Jonah", "./Prophets/Jonah"],
-			["Micah", "./Prophets/Micah"],
-			["Nahum", "./Prophets/Nahum"],
-			["Habakkuk", "./Prophets/Habakkuk"],
-			["Zephaniah", "./Prophets/Zephaniah"],
-			["Haggai", "./Prophets/Haggai"],
-			["Zechariah", "./Prophets/Zechariah"],
-			["Malachi", "./Prophets/Malachi"]
+			["Hosea", "./WEB/Prophets/Hosea"],
+			["Joel", "./WEB/Prophets/Joel"],
+			["Amos", "./WEB/Prophets/Amos"],
+			["Obadiah", "./WEB/Prophets/Obadiah"],
+			["Jonah", "./WEB/Prophets/Jonah"],
+			["Micah", "./WEB/Prophets/Micah"],
+			["Nahum", "./WEB/Prophets/Nahum"],
+			["Habakkuk", "./WEB/Prophets/Habakkuk"],
+			["Zephaniah", "./WEB/Prophets/Zephaniah"],
+			["Haggai", "./WEB/Prophets/Haggai"],
+			["Zechariah", "./WEB/Prophets/Zechariah"],
+			["Malachi", "./WEB/Prophets/Malachi"]
 		]
-
-    ],
+	],
 	
 	[
 		"Berean Greek-English Interlinear New Testament",
@@ -477,125 +474,134 @@ const NAVIGATION = [
 			["Malachi", "./Geneva/Prophets/Malachi"]
 		]
 	],
-	[
-		"World English Bible 2020: New Testament",
 
-		[
-			"Gospel",
+	
+   [
+        "American Standard Version 1901 Text: New Testament",
 
-			["Matthew", "./WEB/Gospel/Matthew"],
-			["Mark", "./WEB/Gospel/Mark"],
-			["Luke", "./WEB/Gospel/Luke"],
-			["John", "./WEB/Gospel/John"]
-		],
+        [
+            "Gospel",
+
+            ["Matthew", "./Gospel/Matthew"],
+            ["Mark", "./Gospel/Mark"],
+            ["Luke", "./Gospel/Luke"],
+            ["John", "./Gospel/John"]
+        ],
 
 		[
 			"Pauline Epistles",
 
-			["Romans", "./WEB/Epistles/Romans"],
-			["1 Corinthians", "./WEB/Epistles/1 Corinthians"],
-			["2 Corinthians", "./WEB/Epistles/2 Corinthians"],
-			["Galatians", "./WEB/Epistles/Galatians"],
-			["Ephesians", "./WEB/Epistles/Ephesians"],
-			["Philippians", "./WEB/Epistles/Philippians"],
-			["Colossians", "./WEB/Epistles/Colossians"],
-			["1 Thessalonians", "./WEB/Epistles/1 Thessalonians"],
-			["2 Thessalonians", "./WEB/Epistles/2 Thessalonians"],
-			["1 Timothy", "./WEB/Epistles/1 Timothy"],
-			["2 Timothy", "./WEB/Epistles/2 Timothy"],
-			["Titus", "./WEB/Epistles/Titus"],
-			["Philemon", "./WEB/Epistles/Philemon"],
-			["Hebrews", "./WEB/Epistles/Hebrews"]
+			["Romans", "./Epistles/Romans"],
+			["1 Corinthians", "./Epistles/1 Corinthians"],
+			["2 Corinthians", "./Epistles/2 Corinthians"],
+			["Galatians", "./Epistles/Galatians"],
+			["Ephesians", "./Epistles/Ephesians"],
+			["Philippians", "./Epistles/Philippians"],
+			["Colossians", "./Epistles/Colossians"],
+			["1 Thessalonians", "./Epistles/1 Thessalonians"],
+			["2 Thessalonians", "./Epistles/2 Thessalonians"],
+			["1 Timothy", "./Epistles/1 Timothy"],
+			["2 Timothy", "./Epistles/2 Timothy"],
+			["Titus", "./Epistles/Titus"],
+			["Philemon", "./Epistles/Philemon"],
+			["Hebrews", "./Epistles/Hebrews"]
 		],
+				
 
 		[
-			"Epistles",
+            "Epistles",
 
-			["James", "./WEB/Epistles/James"],
-			["1 Peter", "./WEB/Epistles/1 Peter"],
-			["2 Peter", "./WEB/Epistles/2 Peter"],
-			["1 John", "./WEB/Epistles/1 John"],
-			["2 John", "./WEB/Epistles/2 John"],
-			["3 John", "./WEB/Epistles/3 John"],
-			["Jude", "./WEB/Epistles/Jude"]
-		],
+            ["James", "./Epistles/James"],
+				["1 Peter", "./Epistles/1 Peter"],
+				["2 Peter", "./Epistles/2 Peter"],
+				["1 John", "./Epistles/1 John"],
+				["2 John", "./Epistles/2 John"],
+				["3 John", "./Epistles/3 John"],
+				["Jude", "./Epistles/Jude"]
+        ],
 
+
+        [
+            "History",
+
+            ["Acts", "./History/Acts"]
+        ],
 		[
-			"History",
+            "Prophecy",
 
-			["Acts", "./WEB/History/Acts"]
-		],
+            ["Revelation", "./Prophets/Revelation"]
+        ]
 
-		[
-			"Prophecy",
+    ],
 
-			["Revelation", "./WEB/Prophets/Revelation"]
-		]
-	],
-
-	[
-		"World English Bible 2020: Old Testament",
+    [
+        "American Standard Version 1901 Text: Old Testament",
 
 		[
 			"Law",
 
-			["Genesis", "./WEB/Law/Genesis"],
-			["Exodus", "./WEB/Law/Exodus"],
-			["Leviticus", "./WEB/Law/Leviticus"],
-			["Numbers", "./WEB/Law/Numbers"],
-			["Deuteronomy", "./WEB/Law/Deuteronomy"]
+			["Genesis", "./Law/Genesis"],
+			["Exodus", "./Law/Exodus"],
+			["Leviticus", "./Law/Leviticus"],
+			["Numbers", "./Law/Numbers"],
+			["Deuteronomy", "./Law/Deuteronomy"]
 		],
 		[
 			"History",
 
-			["Joshua", "./WEB/History/Joshua"],
-			["Judges", "./WEB/History/Judges"],
-			["Ruth", "./WEB/History/Ruth"],
-			["1 Samuel", "./WEB/History/1 Samuel"],
-			["2 Samuel", "./WEB/History/2 Samuel"],
-			["1 Kings", "./WEB/History/1 Kings"],
-			["2 Kings", "./WEB/History/2 Kings"],
-			["1 Chronicles", "./WEB/History/1 Chronicles"],
-			["2 Chronicles", "./WEB/History/2 Chronicles"],
-			["Ezra", "./WEB/History/Ezra"],
-			["Nehemiah", "./WEB/History/Nehemiah"],
-			["Esther", "./WEB/History/Esther"]
+			["Joshua", "./History/Joshua"],
+			["Judges", "./History/Judges"],
+			["Ruth", "./History/Ruth"],
+			["1 Samuel", "./History/1 Samuel"],
+			["2 Samuel", "./History/2 Samuel"],
+			["1 Kings", "./History/1 Kings"],
+			["2 Kings", "./History/2 Kings"],
+			["1 Chronicles", "./History/1 Chronicles"],
+			["2 Chronicles", "./History/2 Chronicles"],
+			["Ezra", "./History/Ezra"],
+			["Nehemiah", "./History/Nehemiah"],
+			["Esther", "./History/Esther"]
 		],
 		[
 			"Poetry",
 
-			["Job", "./WEB/Poetry/Job"],
-			["Psalms", "./WEB/Poetry/Psalms"],
-			["Proverbs", "./WEB/Poetry/Proverbs"],
-			["Ecclesiastes", "./WEB/Poetry/Ecclesiastes"],
-			["Song of Solomon", "./WEB/Poetry/Song of Solomon"]
+			["Job", "./Poetry/Job"],
+			["Psalms", "./Poetry/Psalms"],
+			["Proverbs", "./Poetry/Proverbs"],
+			["Ecclesiastes", "./Poetry/Ecclesiastes"],
+			["Song of Solomon", "./Poetry/Song of Solomon"]
 		],
 		[
 			"Major Prophets",
 
-			["Isaiah", "./WEB/Prophets/Isaiah"],
-			["Jeremiah", "./WEB/Prophets/Jeremiah"],
-			["Lamentations", "./WEB/Prophets/Lamentations"],
-			["Ezekiel", "./WEB/Prophets/Ezekiel"],
-			["Daniel", "./WEB/Prophets/Daniel"]
+			["Isaiah", "./Prophets/Isaiah"],
+			["Jeremiah", "./Prophets/Jeremiah"],
+			["Lamentations", "./Prophets/Lamentations"],
+			["Ezekiel", "./Prophets/Ezekiel"],
+			["Daniel", "./Prophets/Daniel"]
 		],
 		[
 			"Minor Prophets",
 
-			["Hosea", "./WEB/Prophets/Hosea"],
-			["Joel", "./WEB/Prophets/Joel"],
-			["Amos", "./WEB/Prophets/Amos"],
-			["Obadiah", "./WEB/Prophets/Obadiah"],
-			["Jonah", "./WEB/Prophets/Jonah"],
-			["Micah", "./WEB/Prophets/Micah"],
-			["Nahum", "./WEB/Prophets/Nahum"],
-			["Habakkuk", "./WEB/Prophets/Habakkuk"],
-			["Zephaniah", "./WEB/Prophets/Zephaniah"],
-			["Haggai", "./WEB/Prophets/Haggai"],
-			["Zechariah", "./WEB/Prophets/Zechariah"],
-			["Malachi", "./WEB/Prophets/Malachi"]
+			["Hosea", "./Prophets/Hosea"],
+			["Joel", "./Prophets/Joel"],
+			["Amos", "./Prophets/Amos"],
+			["Obadiah", "./Prophets/Obadiah"],
+			["Jonah", "./Prophets/Jonah"],
+			["Micah", "./Prophets/Micah"],
+			["Nahum", "./Prophets/Nahum"],
+			["Habakkuk", "./Prophets/Habakkuk"],
+			["Zephaniah", "./Prophets/Zephaniah"],
+			["Haggai", "./Prophets/Haggai"],
+			["Zechariah", "./Prophets/Zechariah"],
+			["Malachi", "./Prophets/Malachi"]
 		]
-	]
+
+    ]
+	
+	
+	
+	
 ];
 
 // ==========================================
