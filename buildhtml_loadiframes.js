@@ -112,7 +112,8 @@ async function loadTextFile(frameId, file){
     try{
 		await initTemplate();
         const response = await fetch(file);
-        const text = await response.text();
+        const text =
+			(await response.text()).trimStart();
         const iframe =
             document.getElementById(frameId);
         if(iframe){

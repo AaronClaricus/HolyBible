@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="visibility:hidden;">
+<html>
 	<head>
 	<meta charset="UTF-8">
 	<style>
@@ -12,56 +12,29 @@
 			overflow:auto;
 			font-family:monospace;
 			font-size:__FONT_SIZE__;
-		
+			white-space:normal;
 			overflow-wrap:break-word;
 			word-break:break-word;
 			line-height:1.4;
 			background:#000;
 			color:#E0E0E0;
 			box-sizing:border-box;
-			visibility:hidden;
 			overflow:auto;
 		}
 		body > *:first-child{
 			margin-top:0;
 		}
-		html.ready{
-			visibility:visible;
-		}
+
 		#content{
-    white-space:pre-wrap;
-    overflow-wrap:break-word;
-    word-break:break-word;
-}
+			white-space:pre-wrap;
+			overflow-wrap:break-word;
+			word-break:break-word;
+			margin:0;
+			padding:6px;
+		}
 	</style>
 	</head>
-<body>
-__CONTENT__
-</body>
-	<noscript>
-	<style>
-	body{
-		visibility:visible;
-	}
-	</style>
-	</noscript>
-	<script>
-	function showPage(){
-		document.body.style.visibility = "visible";
-		document.documentElement.classList.add("ready");
-	}
-	if(
-		document.readyState === "complete" ||
-		document.readyState === "interactive"
-	){
-		showPage();
-	}
-	else{
-		document.addEventListener(
-			"DOMContentLoaded",
-			showPage,
-			{ once:true }
-		);
-	}
-	</script>
+<body><div id="content">__CONTENT__</div></body>
+
+
 </html>

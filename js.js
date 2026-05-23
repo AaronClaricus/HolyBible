@@ -89,7 +89,6 @@ function escapeHTML(str){
 // ==============================
 // LOAD FILE INTO IFRAME
 // ==============================
-
 async function loadTextFile(frameId, file){
     try{
 		await initTemplate();
@@ -122,6 +121,3 @@ async function loadTextFile(frameId, file){
         }
     }
 }
-
-
-
