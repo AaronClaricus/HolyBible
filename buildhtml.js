@@ -199,7 +199,7 @@ async function loadTextFile(frameId, file) {
 	if (iframe._scrollHandler && iframe._scrollCleanup) {
     iframe._scrollCleanup();
 	}
-    saveScrollPosition(frameId);
+    
     currentFiles[frameId] = file;
 
     try {
@@ -232,15 +232,22 @@ async function loadTextFile(frameId, file) {
 
             const target = iframeScrollPositions[frameId] || 0;
 
-            let i = 0;
-			requestAnimationFrame(function restore() {
-				win.scrollTo(0, target);
-				if (++i < 20) requestAnimationFrame(restore);
-			});
+			let i = 0;
+
+			function restore() {
+				scrollEl.scrollTop = target;
+
+				if (++i < 20) {
+					requestAnimationFrame(restore);
+				}
+			}
+
+			setTimeout(() => {
+				requestAnimationFrame(restore);
+			}, 0);
 
 			iframe._scrollHandler = function () {
-				iframeScrollPositions[frameId] =
-					win.scrollY || scrollEl.scrollTop || 0;
+				iframeScrollPositions[frameId] = scrollEl.scrollTop;
 			};
 
 			const handler = iframe._scrollHandler;
@@ -254,7 +261,9 @@ async function loadTextFile(frameId, file) {
 				doc.removeEventListener("scroll", handler);
 			};
         };
-
+		iframeScrollPositions[frameId] =
+		iframeScrollPositions[frameId] || 0;
+		saveScrollPosition(frameId);
         iframe.srcdoc = buildTextHTML(text, scheme);
 
         updateIframeTitle(frameId, file);
