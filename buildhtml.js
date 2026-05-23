@@ -23,6 +23,14 @@ window.addEventListener("load", function () {
 
 });
 // ==============================
+// SCROLL STORAGE
+// ==============================
+const iframeScrollPositions = {
+    frameB: 0,
+    frameC: 0,
+    frameD: 0
+};
+// ==============================
 // TEMPLATE CACHE
 // ==============================
 let TEMPLATE_HTML = "";
@@ -82,15 +90,36 @@ const currentFiles = {
 // ==============================
 async function loadTextFile(frameId, file){
 
+    // ==============================
+    // SAVE OLD SCROLL POSITION
+    // ==============================
+    const oldIframe =
+        document.getElementById(frameId);
+
+    if(
+        oldIframe &&
+        oldIframe.contentWindow
+    ){
+        try{
+			iframeScrollPositions[frameId] =
+			oldIframe.contentDocument?.documentElement?.scrollTop || 0;
+        } catch(e){}
+    }
+
     currentFiles[frameId] = file;
 
     try{
+
         await initTemplate();
 
-        const response = await fetch(file);
-        const text = await response.text();
+        const response =
+            await fetch(file);
 
-        const iframe = document.getElementById(frameId);
+        const text =
+            await response.text();
+
+        const iframe =
+            document.getElementById(frameId);
 
         const selected =
             document.getElementById("highlightSelector").value;
@@ -103,16 +132,34 @@ async function loadTextFile(frameId, file){
             iframe.srcdoc =
                 buildTextHTML(text, scheme);
 
+            // ==============================
+            // RESTORE SCROLL AFTER LOAD
+            // ==============================
+            iframe.onload = function(){
+
+                try{
+
+ iframe.contentDocument.documentElement.scrollTop =
+    iframeScrollPositions[frameId] || 0;
+
+                } catch(e){}
+            };
+
             updateIframeTitle(frameId, file);
         }
 
     } catch(error){
 
-        const iframe = document.getElementById(frameId);
+        const iframe =
+            document.getElementById(frameId);
 
         if(iframe){
+
             iframe.srcdoc =
-                buildTextHTML("ERROR", highlightSchemes.green);
+                buildTextHTML(
+                    "ERROR",
+                    highlightSchemes.green
+                );
         }
     }
 }
