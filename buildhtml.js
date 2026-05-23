@@ -46,13 +46,6 @@ const iframeScrollPositions = {
 
 
 
-const iframeState = {
-    frameB: { scrollTop: 0 },
-    frameC: { scrollTop: 0 },
-    frameD: { scrollTop: 0 }
-};
-
-
 
 
 // ==============================
@@ -301,18 +294,28 @@ iframe.onload = function () {
     }
 
     restoreLoop();
-
+iframeScrollPositions[frameId] = target;
     // ==========================
     // REMOVE OLD LISTENER
     // ==========================
-    if (iframe._scrollHandler) {
+if (iframe._scrollHandler) {
 
-        win.removeEventListener(
-            "scroll",
-            iframe._scrollHandler
-        );
+    win.removeEventListener(
+        "scroll",
+        iframe._scrollHandler
+    );
 
-    }
+    doc.removeEventListener(
+        "scroll",
+        iframe._scrollHandler
+    );
+
+    scrollEl.removeEventListener(
+        "scroll",
+        iframe._scrollHandler
+    );
+
+}
 
     // ==========================
     // TRACK SCROLL
@@ -327,7 +330,19 @@ iframe.onload = function () {
 
         };
 
-    win.addEventListener(
+     win.addEventListener(
+        "scroll",
+        iframe._scrollHandler,
+        { passive: true }
+    );
+
+    doc.addEventListener(
+        "scroll",
+        iframe._scrollHandler,
+        { passive: true }
+    );
+
+    scrollEl.addEventListener(
         "scroll",
         iframe._scrollHandler,
         { passive: true }
