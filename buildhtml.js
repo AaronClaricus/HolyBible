@@ -38,13 +38,10 @@ let TEMPLATE_HTML = "";
 // LOAD TEMPLATE ONCE
 // ==============================
 async function initTemplate(){
+    if (TEMPLATE_HTML) return;
 
-    const response =
-        await fetch("./template.html");
-
-    TEMPLATE_HTML =
-        await response.text();
-
+    const response = await fetch("./template.html");
+    TEMPLATE_HTML = await response.text();
 }
 // ==============================
 // BUILD HTML
@@ -72,7 +69,7 @@ function buildTextHTML(text, scheme){
 // HTML ESCAPE
 // ==============================
 function escapeHTML(str){
-    return str
+    return String(str)
         .replace(/&/g,"&amp;")
         .replace(/</g,"&lt;")
         .replace(/>/g,"&gt;");
@@ -85,6 +82,24 @@ const currentFiles = {
     frameC: "./Gospel/John",
     frameD: "./Resources"
 };
+
+// ==============================
+// UPDATE IFRAME TITLE FUNCTION
+// ==============================
+function updateIframeTitle(frameId, filePath) {
+    const titleMap = {
+        frameB: "titleB",
+        frameC: "titleC",
+        frameD: "titleD"
+    };
+
+    const titleBar = document.getElementById(titleMap[frameId]);
+    if (!titleBar) return;
+
+    const fileName = filePath.split("/").pop();
+    titleBar.textContent = fileName;
+}
+
 // ==============================
 // LOAD FILE INTO IFRAME
 // ==============================
@@ -124,8 +139,9 @@ async function loadTextFile(frameId, file){
         const selected =
             document.getElementById("highlightSelector").value;
 
-        const scheme =
-            highlightSchemes[selected];
+const scheme =
+    (highlightSchemes && highlightSchemes[selected]) ||
+    { bg: "#000", text: "#fff" };
 
         if(iframe){
 
@@ -135,15 +151,19 @@ async function loadTextFile(frameId, file){
             // ==============================
             // RESTORE SCROLL AFTER LOAD
             // ==============================
-            iframe.onload = function(){
+ iframe.onload = function () {
+    const doc = iframe.contentDocument;
+    if (!doc) return;
 
-                try{
+    const scrollY = iframeScrollPositions[frameId] || 0;
 
- iframe.contentDocument.documentElement.scrollTop =
-    iframeScrollPositions[frameId] || 0;
-
-                } catch(e){}
-            };
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            const root = doc.documentElement || doc.body;
+            root.scrollTop = scrollY;
+        });
+    });
+};
 
             updateIframeTitle(frameId, file);
         }
@@ -163,26 +183,4 @@ async function loadTextFile(frameId, file){
         }
     }
 }
-// ==============================
-// UPDATE IFRAME TITLE FUNCTION
-// ==============================
-function updateIframeTitle(frameId, filePath) {
-    let titleId = "";
-    if (frameId === "frameB") {
-        titleId = "titleB";
-    }
-	    if (frameId === "frameC") {
-        titleId = "titleC";
-    }
-    if (frameId === "frameD") {
-        titleId = "titleD";
-    }
-    const titleBar =
-        document.getElementById(titleId);
-    if (!titleBar) return;
-    const parts =
-        filePath.split("/");
-    const fileName =
-        parts[parts.length - 1];
-    titleBar.textContent = fileName;
-}
+

@@ -1,6 +1,6 @@
-    // ==============================
-    // FONT SIZE CONTROL
-    // ==============================
+ // ==============================
+ // FONT SIZE CONTROL
+ // ==============================
     const fontSelector = document.getElementById("fontSelector");
     if(fontSelector){
         fontSelector.addEventListener("change", function(){
