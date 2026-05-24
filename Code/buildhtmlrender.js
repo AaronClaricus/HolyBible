@@ -1,63 +1,204 @@
 window.addEventListener("load", () => {
+
     console.log("SCRIPT LOADED");
+
     // ==============================
     // FILE LINK HANDLERS
     // ==============================
     document.querySelectorAll(".file-link").forEach(link => {
-		document.addEventListener("click", (e) => {
-			const link = e.target.closest(".file-link");
-			if (!link) return;
 
-			loadTextFile(link.dataset.frame, link.dataset.file);
-		});
+        link.addEventListener("click", () => {
+
+            loadTextFile(
+                link.dataset.frame,
+                link.dataset.file
+            );
+
+        });
+
     });
-    // =========Defaults===========
-    loadTextFile("frameB", "./General Sources/Introduction");
-    loadTextFile("frameC", "./Gospel/John");
-    loadTextFile("frameD", "./General Sources/Resources");
+
+    // ==============================
+    // DEFAULT LOADS
+    // ==============================
+    loadTextFile(
+        "frameB",
+        "./General Sources/Introduction"
+    );
+
+    loadTextFile(
+        "frameC",
+        "./Gospel/John"
+    );
+
+    loadTextFile(
+        "frameD",
+        "./General Sources/Resources"
+    );
+
 });
+
+
 // ==============================
-// HIGHLIGHT SCHEME
+// TRACK CURRENT FILES
 // ==============================
-function getHighlightScheme(highlightSchemes) {
-    const selected = document.getElementById("highlightSelector")?.value;
-    return highlightSchemes?.[selected] ?? { bg: "#000", text: "#fff" };
-}
+const currentFiles = {
+
+    frameB: "./General Sources/Introduction",
+    frameC: "./Gospel/John",
+    frameD: "./General Sources/Resources"
+
+};
+
+
 // ==============================
-// fetch text file
+// IFRAME SCROLL MANAGER
 // ==============================
-async function fetchTextFile(file) {
-    const response = await fetch(file);
-    if (!response.ok) {
-        throw new Error(`Fetch failed: ${response.status} ${response.statusText}`);
+const IframeScrollManager = (() => {
+
+    // persistent scroll state
+    const positions = {
+
+        frameB: 0,
+        frameC: 0,
+        frameD: 0
+
+    };
+
+    // ==============================
+    // GET TRUE SCROLL CONTAINER
+    // ==============================
+    function getScrollElement(doc) {
+
+        return doc.getElementById("content");
+
     }
-    return await response.text();
-}
-// ==============================
-// Handle Iframe Error
-// ==============================
-function handleIframeError(err, iframe) {
-    console.error(err);
-    iframe.srcdoc = buildTextHTML(
-        "ERROR",
-        {
-            bg: "#400",
-            text: "#fff"
+
+    // ==============================
+    // SAVE SCROLL POSITION
+    // ==============================
+    function save(frameId, scrollEl) {
+
+        positions[frameId] = scrollEl.scrollTop;
+
+    }
+
+    // ==============================
+    // RESTORE SCROLL POSITION
+    // ==============================
+    function restore(frameId, scrollEl) {
+
+        if (!scrollEl) return;
+
+        const target = positions[frameId] || 0;
+
+        let attempts = 0;
+        const maxAttempts = 20;
+
+        function applyRestore() {
+
+            scrollEl.scrollTop = target;
+
+            attempts++;
+
+            // stop once stable
+            if (
+                Math.abs(
+                    scrollEl.scrollTop - target
+                ) < 2
+            ) {
+                return;
+            }
+
+            // safety stop
+            if (attempts >= maxAttempts) {
+                return;
+            }
+
+            requestAnimationFrame(
+                applyRestore
+            );
+
         }
-    );
-}
-// ==============================
-// IFRAME LOAD
-// ==============================
-function attachIframeLoadHandler(iframe, frameId, file) {
-    iframe.addEventListener(
-        "load",
-        () => {
-            updateIframeTitle(frameId, file);
-        },
-        { once: true }
-    );
-}
+
+        requestAnimationFrame(
+            applyRestore
+        );
+
+    }
+
+    // ==============================
+    // INITIALIZE IFRAME
+    // ==============================
+    function initialize(iframe, frameId) {
+
+        const doc =
+            iframe.contentDocument;
+
+        if (!doc) return;
+
+        const scrollEl =
+            getScrollElement(doc);
+
+        if (!scrollEl) {
+
+            console.warn(
+                "Missing #content in iframe:",
+                frameId
+            );
+
+            return;
+        }
+
+        // restore previous position
+        restore(frameId, scrollEl);
+
+        // track scrolling
+        const onScroll = () => {
+
+            save(frameId, scrollEl);
+
+        };
+
+        scrollEl.addEventListener(
+            "scroll",
+            onScroll,
+            { passive: true }
+        );
+
+        // cleanup handler
+        iframe._scrollCleanup = () => {
+
+            scrollEl.removeEventListener(
+                "scroll",
+                onScroll
+            );
+
+        };
+
+    }
+
+    // ==============================
+    // CLEANUP
+    // ==============================
+    function cleanup(iframe) {
+
+        iframe._scrollCleanup?.();
+
+        iframe._scrollCleanup = null;
+
+    }
+
+    return {
+
+        initialize,
+        cleanup
+
+    };
+
+})();
+
+
 // ==============================
 // LOAD FILE INTO IFRAME
 // ==============================
@@ -65,16 +206,103 @@ async function loadTextFile(
     frameId,
     file
 ) {
-    const iframe = document.getElementById(frameId);
+
+    const iframe =
+        document.getElementById(frameId);
+
     if (!iframe) return;
+
+    // remove old listeners
+    IframeScrollManager.cleanup(
+        iframe
+    );
+console.log("A");
+    currentFiles[frameId] = file;
+console.log(
+    iframe.contentDocument.activeElement
+);
     try {
+
         await initTemplate();
-        if (!iframe) return;
-		const text = await fetchTextFile(file);
-		const scheme = getHighlightScheme(highlightSchemes);
-		attachIframeLoadHandler(iframe, frameId, file);
-		iframe.srcdoc = buildTextHTML(text, scheme);
+console.log("B");
+        const response =
+            await fetch(file);
+
+        const text =
+            await response.text();
+		const doc = iframe.contentDocument;
+
+		console.log(
+			doc.getElementById("content")
+		);
+        // ==============================
+        // HIGHLIGHT SCHEME
+        // ==============================
+        const selected =
+            document.getElementById(
+                "highlightSelector"
+            )?.value;
+
+        const scheme =
+            (
+                highlightSchemes &&
+                highlightSchemes[selected]
+            ) || {
+
+                bg: "#000",
+                text: "#fff"
+
+            };
+console.log("C");
+        // ==============================
+        // LOAD COMPLETE
+        // ==============================
+        iframe.addEventListener(
+            "load",
+            () => {
+
+                IframeScrollManager
+                    .initialize(
+                        iframe,
+                        frameId
+                    );
+
+                updateIframeTitle(
+                    frameId,
+                    file
+                );
+
+            },
+            { once: true }
+        );
+
+        // ==============================
+        // LOAD CONTENT
+        // ==============================
+        iframe.srcdoc =
+            buildTextHTML(
+                text,
+                scheme
+            );
+
     } catch (err) {
-    handleIframeError(err, iframe);
-	}
+
+        console.error(err);
+
+        iframe.srcdoc =
+            buildTextHTML(
+                "ERROR",
+                {
+                    bg: "#400",
+                    text: "#fff"
+                }
+            );
+
+    }
+
 }
+
+
+
+
+

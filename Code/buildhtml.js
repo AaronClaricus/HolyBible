@@ -15,7 +15,7 @@ async function initTemplate(){
 // ==============================
 // BUILD HTML
 // ==============================
- function buildTextHTML(text, scheme){
+function buildTextHTML(text, scheme){
     const size =
         getComputedStyle(document.documentElement)
             .getPropertyValue("--font-size");
@@ -35,7 +35,7 @@ async function initTemplate(){
         .replaceAll("__FONT_SIZE__", size)
         .replaceAll("__HIGHLIGHT_BG__", scheme.bg)
         .replaceAll("__HIGHLIGHT_TEXT__", scheme.text)
-        .replaceAll("__CONTENT__", content);
+        .replace("__CONTENT__", content);
 }
 // ==============================
 // HTML ESCAPE
@@ -45,4 +45,5 @@ function escapeHTML(str){
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;");
+
 }
