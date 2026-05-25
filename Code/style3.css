@@ -172,6 +172,12 @@ width:240px;
 body.two-panel .center-col{
     display:none;
 }
+body.two-panel .center-col2{
+    display:none;
+}
+body.three-panel .center-col2{
+    display:none;
+}
 body.two-panel .center-item,
 body.two-panel .center-item *{
     display:none !important;
