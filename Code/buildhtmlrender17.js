@@ -35,7 +35,7 @@ loadTextFile(
 );
 loadTextFile(
     "frameC",
-    "./WEB/Gospel/WEB John"
+    "./WEB/Gospel/John"
 );
 loadTextFile(
     "frameD",
