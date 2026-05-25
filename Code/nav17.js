@@ -608,10 +608,10 @@ const NAVIGATION = [
 // FRAME CONFIG
 // ==========================================
 const FRAMES = [
-    ["frameB", "LEFT"],
-    ["frameC", "CENTER"],
-    ["frameD", "RIGHT"],
-    ["frameE", "FAR RIGHT"],
+    ["frameB", "A"],
+    ["frameC", "B"],
+    ["frameD", "C"],
+    ["frameE", "D"],
 
 ];
 // ==========================================

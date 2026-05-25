@@ -47,7 +47,7 @@ body{
     background:#111111 !important;
     color:#E0E0E0;
     border-right:1px solid #333;
-    padding:10px;
+    padding:6px;
        height:100%;
 }
 .nav-controls{
@@ -66,28 +66,28 @@ select{
 ========================= */
 ul{
     list-style:none;
-    padding:3px;
+    padding:1px;
 }
 li{
-    margin:0.15em 0;
+    margin:1px;
     user-select:none;
 }
 .toggle,
 .file-link{
     display:block;
-    border-radius:4px;
+    border-radius:2px;
     cursor:pointer;
 }
 .toggle{
     width:100%;
-    padding:0.2em 0.3em;
+    padding:2px;
     background:none;
     border:none;
     color:inherit;
     text-align:left;
 }
 .file-link{
-    padding:0.15em 0.3em 0.15em 8px;
+    padding:2px;
     word-break:break-word;
 }
 .toggle:hover,
@@ -100,7 +100,7 @@ li{
 .nested{
     display:none !important;
     margin-left:1em;
-    padding-left:0.5em;
+    padding-left:1px;
     border-left:1px solid #ccc;
 }
 .nested.open{
@@ -108,7 +108,7 @@ li{
 }
 .section-title{
     font-weight:bold;
-    padding:0.2em 0.3em;
+    padding:1px;
 }
 .spacer{
     height:0.5em;
