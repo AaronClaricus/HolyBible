@@ -4,7 +4,7 @@
 // ==============================
 const currentFiles = {};
 const savedScrollPositions = {};
-
+const fileCache = {};
 
 
 
@@ -35,7 +35,7 @@ loadTextFile(
 );
 loadTextFile(
     "frameC",
-    "./WEB/Gospel/John"
+    "./WEB/Gospel/WEB John"
 );
 loadTextFile(
     "frameD",
@@ -65,8 +65,47 @@ function getHighlightScheme(highlightSchemes) {
 // fetch text file
 // ==============================
 async function fetchTextFile(file) {
-    const response = await fetch(file);
-    return await response.text();
+
+    // ==========================
+    // RETURN CACHED VERSION
+    // ==========================
+    if (fileCache[file]) {
+
+        console.log(
+            "[CACHE HIT]",
+            file
+        );
+
+        return fileCache[file];
+    }
+
+    // ==========================
+    // FETCH FILE
+    // ==========================
+    console.log(
+        "[FETCH]",
+        file
+    );
+
+    const response =
+        await fetch(file);
+
+    if (!response.ok) {
+
+        throw new Error(
+            `Failed to fetch ${file}`
+        );
+    }
+
+    const text =
+        await response.text();
+
+    // ==========================
+    // SAVE TO CACHE
+    // ==========================
+    fileCache[file] = text;
+
+    return text;
 }
 // ==============================
 // LOAD CONTENT
@@ -188,47 +227,35 @@ function attachScrollTracking(frameId) {
         const iframeWindow =
             iframe.contentWindow;
 
-        iframeWindow.onscroll = () => {
+		let scrollTimeout;
 
-            console.log(
-                frameId + " SCROLL:",
-                iframeWindow.scrollY
-            );
+		iframeWindow.addEventListener(
+			"scroll",
+			() => {
 
-            const currentFile =
-                currentFiles[frameId];
+				clearTimeout(scrollTimeout);
 
-            if (!currentFile) {
-                console.log(
-                    frameId + ": NO CURRENT FILE"
-                );
-                return;
-            }
-			// rev 9 and 10 drop in
-			// rev 13 drop in
-			const key =
-				`scroll:${frameId}:${currentFile}`;
+				scrollTimeout = setTimeout(() => {
 
-			localStorage.setItem(
-				key,
-				iframeWindow.scrollY
-			);
-			// rev 13 drop in
-			console.log(
-				"SAVED:",
-				currentFile,
-				savedScrollPositions[currentFile]
-			);
+					const currentFile =
+						currentFiles[frameId];
 
-			const scrollY = savedScrollPositions[currentFile];
-			// rev 9 drop in
-            console.log(
-                "SAVED:",
-                currentFile,
-                savedScrollPositions[currentFile]
-            );
-        };
-        // rev 8 drop in
+					if (!currentFile) return;
+
+					const key =
+						`scroll:${frameId}:${currentFile}`;
+
+					localStorage.setItem(
+						key,
+						iframeWindow.scrollY
+					);
+
+				}, 100);
+
+			},
+			{ passive: true }
+		);
+				// rev 8 drop in
         
         restoreScrollPosition(frameId, iframe);
         
