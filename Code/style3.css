@@ -185,6 +185,18 @@ body.two-panel .center-item *{
 body.two-panel .center-item *{
     display:none !important;
 }
+body.three-panel .center-itemA,
+body.three-panel .center-itemA *{
+    display:none !important;
+}
+body.three-panel .center-item2 *{
+    display:none !important;
+}
+
+body.two-panel .center-item2,
+body.two-panel .center-item2 * {
+    display: none !important;
+}
 
 mark, .highlight {
     background: var(--highlight-color, yellow);

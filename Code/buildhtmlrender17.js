@@ -35,11 +35,11 @@ loadTextFile(
 );
 loadTextFile(
     "frameC",
-    "./Gospel/John"
+    "./WEB/Gospel/John"
 );
 loadTextFile(
     "frameD",
-    "./Prophets/Revelation"
+    "./WEB/Prophets/Revelation"
 );
 loadTextFile(
     "frameE",
