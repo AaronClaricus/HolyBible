@@ -168,33 +168,37 @@ width:240px;
 .center-col{
     width: auto;
 }
-/* TWO PANEL MODE */
-body.two-panel .center-col{
-    display:none;
-}
-body.two-panel .center-col2{
-    display:none;
-}
-body.three-panel .center-col2{
-    display:none;
-}
-body.two-panel .center-item,
-body.two-panel .center-item *{
-    display:none !important;
-}
-body.two-panel .center-item *{
-    display:none !important;
-}
-body.three-panel .center-itemA,
-body.three-panel .center-itemA *{
-    display:none !important;
-}
-body.three-panel .center-item2 *{
-    display:none !important;
+/* =========================================
+   THREE PANEL MODE
+   Hide frameD column
+========================================= */
+
+body.three-panel .center-col{
+    display: none;
 }
 
-body.two-panel .center-item2,
-body.two-panel .center-item2 * {
+/* Hide navigation item for frameD */
+body.three-panel .center-item{
+    display: none !important;
+}
+
+/* =========================================
+   TWO PANEL MODE
+   Hide frameC and frameD columns
+========================================= */
+
+body.two-panel .center-col,
+body.two-panel .center-col2{
+    display: none;
+}
+
+/* Hide nav item for frameC */
+body.two-panel .center-item{
+    display: none !important;
+}
+
+/* Hide nav item for frameD */
+body.two-panel .center-item2{
     display: none !important;
 }
 

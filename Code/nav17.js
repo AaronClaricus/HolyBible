@@ -645,6 +645,16 @@ function createTree(node){
 		// THREE PANEL TOGGLE ITEMS
 		// HIDE frameD CONTROLS
 		// ==============================
+		
+				// ==============================
+		// THREE PANEL TOGGLE ITEMS
+		// HIDE frameD CONTROLS
+		// ==============================
+		if(frame[0] === "frameD"){
+			frameLi.classList.add("center-item2");
+		}
+		
+		
 		// ==========================================
 // RECURSIVE BUILDER
 // ==========================================
@@ -672,13 +682,7 @@ function createTree(node){
 				"center-item"
 			);
 		}
-		// ==============================
-		// THREE PANEL TOGGLE ITEMS
-		// HIDE frameD CONTROLS
-		// ==============================
-		if(frame[0] === "frameD"){
-			frameLi.classList.add("center-item2");
-		}
+
 			const link =
 				document.createElement("span");
 			link.className = "file-link";
