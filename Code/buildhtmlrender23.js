@@ -12,6 +12,14 @@ const fileCache = {};
 const MAX_CACHE = 50;
 // tracks cache order
 const cacheOrder = [];
+// ==============================
+// SCROLL STATE STORAGE
+// ==============================
+const SCROLL_STORE_KEY =
+    "scroll-state";
+
+// max saved files PER FRAME
+const MAX_SCROLL_HISTORY = 500;
 window.addEventListener("load", () => {
     console.log("SCRIPT LOADED");
     // ==============================
@@ -35,7 +43,7 @@ loadTextFile(
 );
 loadTextFile(
     "frameC",
-    "./WEB/Gospel/WEB John"
+    "./WEB/Gospel/John"
 );
 loadTextFile(
     "frameD",
@@ -151,6 +159,35 @@ function normalizeFileKey(file) {
 }
 //rev 9 drop in
 // ==============================
+// LOAD SCROLL STORE
+// ==============================
+function loadScrollStore() {
+
+    try {
+
+        return JSON.parse(
+            localStorage.getItem(
+                SCROLL_STORE_KEY
+            )
+        ) || {};
+
+    } catch {
+
+        return {};
+    }
+}
+
+// ==============================
+// SAVE SCROLL STORE
+// ==============================
+function saveScrollStore(store) {
+
+    localStorage.setItem(
+        SCROLL_STORE_KEY,
+        JSON.stringify(store)
+    );
+}
+// ==============================
 // RESTORE SCROLL Position 
 // ==============================
 function restoreScrollPosition(frameId, iframe) {
@@ -160,15 +197,35 @@ function restoreScrollPosition(frameId, iframe) {
         return;
     }
 	// rev 13 drop in
-	const key =
-		`scroll:${frameId}:${file}`;
-	const scrollY =
-		Number(localStorage.getItem(key));
-	if (isNaN(scrollY)) {
+	// ==============================
+	// LOAD STORE
+	// ==============================
+	const store =
+		loadScrollStore();
+
+	const entry =
+		store?.[frameId]?.[file];
+
+	if (!entry) {
+
 		console.log(
-			"[RESTORE SKIPPED] No saved position for",
+			"[RESTORE SKIPPED]",
 			file
 		);
+
+		return;
+	}
+
+	const scrollY =
+		Number(entry.y);
+
+	if (isNaN(scrollY)) {
+
+		console.log(
+			"[RESTORE FAILED]",
+			file
+		);
+
 		return;
 	}
     const iframeWindow = iframe.contentWindow;
@@ -211,12 +268,54 @@ function attachScrollTracking(frameId) {
 				setTimeout(() => {
 					if (!file)
 						return;
-					const key =
-						`scroll:${frameId}:${file}`;
-					localStorage.setItem(
-						key,
-						iframeWindow.scrollY
-					);
+					// ==============================
+					// LOAD STORE
+					// ==============================
+					const store =
+						loadScrollStore();
+
+					// ensure frame exists
+					if (!store[frameId]) {
+
+						store[frameId] = {};
+					}
+
+					// ==============================
+					// SAVE POSITION
+					// ==============================
+					store[frameId][file] = {
+
+						y: iframeWindow.scrollY,
+						time: Date.now()
+					};
+
+					// ==============================
+					// LIMIT HISTORY
+					// keep newest 500
+					// ==============================
+					const entries =
+						Object.entries(store[frameId]);
+
+					if (entries.length > MAX_SCROLL_HISTORY) {
+
+						entries.sort(
+							(a, b) =>
+								b[1].time - a[1].time
+						);
+
+						store[frameId] =
+							Object.fromEntries(
+								entries.slice(
+									0,
+									MAX_SCROLL_HISTORY
+								)
+							);
+					}
+
+					// ==============================
+					// SAVE STORE
+					// ==============================
+					saveScrollStore(store);
 				}, 100);
 		};
 		// restore scroll

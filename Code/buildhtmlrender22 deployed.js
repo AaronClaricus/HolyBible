@@ -1,4 +1,4 @@
-
+// rev 7 code block
 // ==============================
 // TRACKING STORAGE
 // ==============================
@@ -8,10 +8,18 @@ const savedScrollPositions = {};
 // FILE CACHE
 // ==============================
 const fileCache = {};
+
 // max cached files
 const MAX_CACHE = 50;
+
 // tracks cache order
 const cacheOrder = [];
+
+
+
+// rev 7 code block
+
+
 window.addEventListener("load", () => {
     console.log("SCRIPT LOADED");
     // ==============================
@@ -25,6 +33,7 @@ window.addEventListener("load", () => {
             );
         });
     });
+
 });
 // ==============================
 // DEFAULT LOADS
@@ -35,7 +44,7 @@ loadTextFile(
 );
 loadTextFile(
     "frameC",
-    "./WEB/Gospel/WEB John"
+    "./WEB/Gospel/John"
 );
 loadTextFile(
     "frameD",
@@ -45,33 +54,40 @@ loadTextFile(
     "frameE",
     "./General Sources/Resources"
 );
+
 // ==============================
 // HIGHLIGHT SCHEME
 // ==============================
 function getHighlightScheme(highlightSchemes) {
     const selected =
         document.getElementById("highlightSelector")?.value;
+
     const scheme =
         (highlightSchemes && highlightSchemes[selected]) || {
             bg: "#000",
             text: "#fff"
         };
+
     return scheme;
 }
 // ==============================
 // fetch text file
 // ==============================
 async function fetchTextFile(file) {
+
     // ==========================
     // RETURN CACHED VERSION
     // ==========================
     if (fileCache[file]) {
+
         console.log(
             "[CACHE HIT]",
             file
         );
+
         return fileCache[file];
     }
+
     // ==========================
     // FETCH FILE
     // ==========================
@@ -79,31 +95,43 @@ async function fetchTextFile(file) {
         "[FETCH]",
         file
     );
+
     const response =
         await fetch(file);
+
     if (!response.ok) {
+
         throw new Error(
             `Failed to fetch ${file}`
         );
     }
+
     const text =
         await response.text();
+
 	// ==============================
 	// CACHE FILE
 	// ==============================
 	fileCache[file] = text;
+
 	// remember order
 	cacheOrder.push(file);
+
 	// remove oldest cache entry
 	if (cacheOrder.length > MAX_CACHE) {
+
 		const oldest =
 			cacheOrder.shift();
+
 		delete fileCache[oldest];
+
 		console.log(
 			"[CACHE REMOVED]",
 			oldest
 		);
+
 	}
+
     return text;
 }
 // ==============================
@@ -125,6 +153,7 @@ function handleIframeError(err, iframe) {
         }
     );
 }
+
 // ==============================
 // LOAD FILE INTO IFRAME
 // ==============================
@@ -146,15 +175,21 @@ async function loadTextFile(
 }
 // DO NOT MODIFY ABOVE UNTIL WORKING
 //rev 9 drop in
+
 function normalizeFileKey(file) {
     return file.replace(/^\.\//, "");
 }
+
 //rev 9 drop in
+// rev 8 drop in
+
 // ==============================
 // RESTORE SCROLL Position 
 // ==============================
 function restoreScrollPosition(frameId, iframe) {
+
     const file = currentFiles[frameId];
+
     if (!file) {
         console.log("[RESTORE BLOCKED] No file for", frameId);
         return;
@@ -162,16 +197,21 @@ function restoreScrollPosition(frameId, iframe) {
 	// rev 13 drop in
 	const key =
 		`scroll:${frameId}:${file}`;
+
 	const scrollY =
 		Number(localStorage.getItem(key));
 	if (isNaN(scrollY)) {
+
 		console.log(
 			"[RESTORE SKIPPED] No saved position for",
 			file
 		);
+
 		return;
 	}
+
     const iframeWindow = iframe.contentWindow;
+
     // ensure layout is ready
     setTimeout(() => {
         iframeWindow.scrollTo(0, scrollY);
@@ -184,46 +224,66 @@ function restoreScrollPosition(frameId, iframe) {
         );
     }, 0);
 }
+// rev 8 drop in
+
+
+
 // ==============================
 // ATTACH SCROLL TRACKER TO ANY FRAME
 // ==============================
 function attachScrollTracking(frameId) {
+
     const iframe =
         document.getElementById(frameId);
+
     if (!iframe) return;
+
     // ONE persistent load handler
     	iframe.onload = () => {
+
 		console.log(
 			frameId + " LOADED"
 		);
+
 		const iframeWindow =
 			iframe.contentWindow;
+
 		// current file for this frame
 		const file =
 			currentFiles[frameId];
+
 		let scrollTimeout;
+
 		// ONE scroll handler
 		iframeWindow.onscroll = () => {
+
 			clearTimeout(
 				scrollTimeout
 			);
+
 			scrollTimeout =
 				setTimeout(() => {
+
 					if (!file)
 						return;
+
 					const key =
 						`scroll:${frameId}:${file}`;
+
 					localStorage.setItem(
 						key,
 						iframeWindow.scrollY
 					);
+
 				}, 100);
 		};
+
 		// restore scroll
 		restoreScrollPosition(
 			frameId,
 			iframe
 		);
+
 		// update title
 		updateIframeTitle(
 			frameId,
@@ -234,14 +294,19 @@ function attachScrollTracking(frameId) {
 // ==============================
 // APPLY TO ALL FRAMES
 // ==============================
+
+
 ["frameB", "frameC", "frameD","frameE"]
     .forEach(attachScrollTracking);
+
 // ==============================
 // SCROLL SAVE FUNCTION
 // ==============================
 function saveScrollPosition(frameId, scrollY) {
+
     const file =
         currentFiles[frameId];
+
     console.log(
         "[SCROLL SAVE TRIGGERED]",
         "frame:",
@@ -251,6 +316,7 @@ function saveScrollPosition(frameId, scrollY) {
         "scrollY:",
         scrollY
     );
+
     if (!file) {
         console.log(
             "[SCROLL SAVE BLOCKED] No file for",
@@ -258,8 +324,10 @@ function saveScrollPosition(frameId, scrollY) {
         );
         return;
     }
+
     savedScrollPositions[file] =
         scrollY;
+
     console.log(
         "[SCROLL SAVED]",
         file,
