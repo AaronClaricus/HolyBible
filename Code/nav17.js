@@ -608,10 +608,10 @@ const NAVIGATION = [
 // FRAME CONFIG
 // ==========================================
 const FRAMES = [
-    ["frameB", "A"],
-    ["frameC", "B"],
-    ["frameD", "C"],
-    ["frameE", "D"],
+    ["frameB", "LEFT"],
+    ["frameC", "CENTER"],
+    ["frameD", "RIGHT"],
+    ["frameE", "FAR RIGHT"],
 
 ];
 // ==========================================
@@ -630,112 +630,47 @@ function createTree(node){
         li.appendChild(button);
         const nested = document.createElement("ul");
         nested.className = "nested";
-		FRAMES.forEach(frame => {
+FRAMES.forEach(frame => {
 			const frameLi =
 				document.createElement("li");
-		// ==============================
-		// CENTER PANEL ITEMS
-		// ==============================
-		if(frame[0] === "frameC"){
-			frameLi.classList.add(
-				"center-item"
-			);
-		}
-		// ==============================
-		// THREE PANEL TOGGLE ITEMS
-		// HIDE frameD CONTROLS
-		// ==============================
-		
-				// ==============================
-		// THREE PANEL TOGGLE ITEMS
-		// HIDE frameD CONTROLS
-		// ==============================
-		if(frame[0] === "frameD"){
-			frameLi.classList.add("center-item2");
-		}
-		
-		
-		// ==========================================
-// RECURSIVE BUILDER
-// ==========================================
-function createTree(node){
-    const li = document.createElement("li");
-    // ======================================
-    // BOOK
-    // ["Matthew", "./Gospel/Matthew"]
-    // ======================================
-    if(typeof node[1] === "string"){
-        const button = document.createElement("button");
-        button.className = "toggle";
-        button.textContent = "▶ " + node[0];
-        li.appendChild(button);
-        const nested = document.createElement("ul");
-        nested.className = "nested";
-		FRAMES.forEach(frame => {
-			const frameLi =
-				document.createElement("li");
-		// ==============================
-		// CENTER PANEL ITEMS
-		// ==============================
-		if(frame[0] === "frameC"){
-			frameLi.classList.add(
-				"center-item"
-			);
-		}
+
+			// ==============================
+			// CENTER PANEL ITEMS
+			// ==============================
+			if(frame[0] === "frameC"){
+				frameLi.classList.add(
+					"center-item"
+				);
+			}
+
+			// ==============================
+			// RIGHT PANEL ITEMS
+			// ==============================
+			if(frame[0] === "frameD"){
+				frameLi.classList.add(
+					"center-item2"
+				);
+			}
+
+			// ==============================
+			// FAR RIGHT PANEL ITEMS
+			// ==============================
+			if(frame[0] === "frameE"){
+				frameLi.classList.add(
+					"center-item3"
+				);
+			}
 
 			const link =
 				document.createElement("span");
-			link.className = "file-link";
-			link.dataset.frame = frame[0];
-			link.dataset.file = node[1];
-			link.textContent =
-				frame[1] + " : " + node[0];
-			frameLi.appendChild(link);
-			nested.appendChild(frameLi);
-		});
-        li.appendChild(nested);
-        return li;
-    }
-    // ======================================
-    // CATEGORY
-    // ["Gospel", [...], [...]]
-    // ======================================
-    const button = document.createElement("button");
-    button.className = "toggle";
-    button.textContent = "▶ " + node[0];
-    li.appendChild(button);
-    const nested = document.createElement("ul");
-    nested.className = "nested";
-    for(let i = 1; i < node.length; i++){
-        nested.appendChild(
-            createTree(node[i])
-        );
-    }
-    li.appendChild(nested);
-    return li;
-}
-// ==========================================
-// BUILD NAV
-// ==========================================
 
-function buildNavigation(containerId, data){
-    const container =
-        document.getElementById(containerId);
-    const ul = document.createElement("ul");
-    data.forEach(node => {
-        ul.appendChild(
-            createTree(node)
-        );
-    });
-    container.appendChild(ul);
-}
-			const link =
-				document.createElement("span");
 			link.className = "file-link";
 			link.dataset.frame = frame[0];
 			link.dataset.file = node[1];
+
 			link.textContent =
 				frame[1] + " : " + node[0];
+
 			frameLi.appendChild(link);
 			nested.appendChild(frameLi);
 		});
