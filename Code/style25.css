@@ -242,6 +242,9 @@ body.two-panel .dummy {width:2px;
 body.two-panel .center-item{
     display: none;
 }
+body.two-panel .center-item2{
+    display: none;
+}
 /* =========================================
    1 PANEL
 ========================================= */
