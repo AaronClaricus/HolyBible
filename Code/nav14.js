@@ -630,9 +630,10 @@ function createTree(node){
         li.appendChild(button);
         const nested = document.createElement("ul");
         nested.className = "nested";
-		FRAMES.forEach(frame => {
+FRAMES.forEach(frame => {
 			const frameLi =
 				document.createElement("li");
+
 			// ==============================
 			// CENTER PANEL ITEMS
 			// ==============================
@@ -641,13 +642,35 @@ function createTree(node){
 					"center-item"
 				);
 			}
+
+			// ==============================
+			// RIGHT PANEL ITEMS
+			// ==============================
+			if(frame[0] === "frameD"){
+				frameLi.classList.add(
+					"center-item2"
+				);
+			}
+
+			// ==============================
+			// FAR RIGHT PANEL ITEMS
+			// ==============================
+			if(frame[0] === "frameE"){
+				frameLi.classList.add(
+					"center-item3"
+				);
+			}
+
 			const link =
 				document.createElement("span");
+
 			link.className = "file-link";
 			link.dataset.frame = frame[0];
 			link.dataset.file = node[1];
+
 			link.textContent =
 				frame[1] + " : " + node[0];
+
 			frameLi.appendChild(link);
 			nested.appendChild(frameLi);
 		});
