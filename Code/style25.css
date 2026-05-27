@@ -226,6 +226,9 @@ body.three-panel .center-col{
 body.three-panel .dummy {width:2px;
 		color:#000000:
 }
+body.three-panel .center-item2{
+    display: none;
+}
 /* =========================================
    2 PANEL
 ========================================= */
@@ -235,6 +238,9 @@ body.two-panel .center-col2{
 }
 body.two-panel .dummy {width:2px;
 		color:#000000;
+}
+body.two-panel .center-item{
+    display: none;
 }
 /* =========================================
    1 PANEL
@@ -275,4 +281,13 @@ body.one-panel #frameB {
 
     display: block;
     border: none;
+}
+body.one-panel .center-item3{
+    display: none !important;
+}
+body.one-panel .center-item{
+    display: none !important;
+}
+body.one-panel .center-item2{
+    display: none !important;
 }
